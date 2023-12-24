@@ -1,0 +1,54 @@
+#
+# ~/.bashrc
+#
+
+################################################################################
+# If not running interactively, don't do anything
+################################################################################
+[[ $- != *i* ]] && return
+
+
+################################################################################
+# Fallback PS1
+################################################################################
+PS1='[\u@\h \W]\$ '
+
+
+################################################################################
+# PATH
+################################################################################
+PATH=$PATH:/home/pkoscik/.cargo/bin
+PATH=$PATH:/home/pkoscik/Renode/renode_1.14.0
+
+
+################################################################################
+# Aliases
+################################################################################
+alias grep='grep --color=auto'
+alias l="exa -l --icons --no-user --group-directories-first  --time-style long-iso --git"
+alias ll="exa -l --icons --group-directories-first  --time-style long-iso --git --all"
+alias py="python"
+alias xc='xsel -i -b'
+alias q='exit'
+alias da='xdg-open'
+
+
+################################################################################
+# Functions
+################################################################################
+function venv {	
+	venv=($(ls -a | grep venv))
+	len=${#venv[@]}
+	if [[ "$len" -gt 1 ]]; then
+		echo "More than one virtual environment found, aborting!"
+		return 1
+	else
+		echo "Activating virtual environment at $venv"
+		source $venv/bin/activate
+	fi
+}
+
+################################################################################
+# Starship PS1
+################################################################################
+eval "$(starship init bash)"

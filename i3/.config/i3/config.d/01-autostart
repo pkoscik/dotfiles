@@ -1,0 +1,14 @@
+#############
+# Autostart #
+#############
+
+# Wireless tray managers
+# exec --no-startup-id blueman-applet
+# exec --no-startup-id nm-applet
+
+# Notification deamon
+exec --no-startup-id /usr/bin/dunst
+
+# Screenshot tool
+exec --no-startup-id flameshot
+

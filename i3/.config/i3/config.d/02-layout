@@ -1,0 +1,45 @@
+# Change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# Move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# Layout
+# TODO: rethink
+# bindsym $mod+h split h
+# bindsym $mod+v split v
+# bindsym $mod+w layout stacked
+# bindsym $mod+e layout toggle split
+# bindsym $mod+a focus parent
+# bindsym $mod+s focus child
+
+# Floating
+floating_modifier $mod
+bindsym $mod+Shift+space floating toggle
+
+# Resize mode
+mode "resize" {
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+bindsym $mod+r mode "resize"
+
+##############
+# Scratchpad #
+##############
+bindsym $mod+Shift+backslash move scratchpad
+bindsym $mod+backslash scratchpad show
+
+

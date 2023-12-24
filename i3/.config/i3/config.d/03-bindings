@@ -1,0 +1,36 @@
+############
+# Bindings #
+############
+
+# General
+bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Shift+q kill
+bindsym $mod+f fullscreen toggle
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+e exec "i3-msg exit"
+
+# Rofi
+bindsym $mod+d exec "rofi -show drun"
+
+# Flameshot
+bindsym $mod+Shift+s exec "flameshot gui"
+
+# i3lock
+bindsym $mod+o exec "i3lock -c 000000"
+
+
+#########
+# Audio #
+#########
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume 	exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ 	+10%   && $refresh_i3status
+bindsym XF86AudioLowerVolume 	exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ 	-10%   && $refresh_i3status
+bindsym XF86AudioMute 			exec --no-startup-id pactl set-sink-mute   @DEFAULT_SINK@ 	toggle && $refresh_i3status
+bindsym XF86AudioMicMute 		exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+bindsym XF86MonBrightnessUp 	exec --no-startup-id brightnessctl s 10%+
+bindsym XF86MonBrightnessDown 	exec --no-startup-id brightnessctl s 10%-
+bindsym XF86AudioPlay			exec playerctl play-pause
+bindsym XF86AudioPause			exec playerctl play-pause
+bindsym XF86AudioNext			exec playerctl next
+bindsym XF86AudioPrev			exec playerctl previous
+

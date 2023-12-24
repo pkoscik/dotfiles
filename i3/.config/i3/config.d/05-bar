@@ -1,0 +1,17 @@
+##########
+# i3 Bar #
+##########
+
+bar {
+	status_command i3status 
+    position bottom
+    font pango:JetBrains Mono 10
+	colors {
+    	separator #666666
+    	background #333333
+    	focused_workspace #888888 #dddddd #222222 #ffffff
+    	active_workspace #333333 #555555 #bbbbbb #aea79f
+    	inactive_workspace #333333 #555555 #bbbbbb #aea79f
+    	urgent_workspace #2f343a #900000 #ffffff #ffffff
+  }
+}

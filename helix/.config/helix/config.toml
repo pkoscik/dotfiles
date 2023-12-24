@@ -1,0 +1,43 @@
+theme = "github_dark"
+
+[editor]
+true-color = true
+mouse = false
+middle-click-paste = true
+line-number = "relative"
+bufferline = "multiple"
+cursorline = true
+color-modes = true
+auto-pairs = true
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.statusline]
+left = ["mode", "separator", "file-name", "file-modification-indicator"]
+right = ["selections", "file-encoding","spinner", "separator", "diagnostics", "position-percentage"]
+separator = " "
+mode.normal = "nor"
+mode.insert = "ins"
+mode.select = "sel"
+
+[editor.lsp]
+display-messages = true
+
+[editor.file-picker]
+hidden = true
+
+[editor.indent-guides]
+render = true
+character = "┊"
+skip-levels = 1
+
+[keys.normal]
+C-j= "goto_previous_buffer"
+C-k= "goto_next_buffer"
+C-del = ":buffer-close"
+
+# ZelliJ
+C-e = ":sh zellij run --floating --close-on-exit -- tig"
