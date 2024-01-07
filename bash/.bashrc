@@ -32,6 +32,8 @@ alias xc='xsel -i -b'
 alias q='exit'
 alias da='xdg-open'
 
+# Zellij
+alias za='zellij attach $(zellij ls -s | fzf)'
 
 ################################################################################
 # Functions
