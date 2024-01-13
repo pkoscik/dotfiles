@@ -5,6 +5,13 @@
 general {
     interval = 1
     colors = true
+    # Theme: dracula
+    # Source: https://github.com/dracula/i3
+    # Licence: MIT
+    output_format = "i3bar"
+    color_good = "#50FA7B"
+    color_degraded = "#F1FA8C"
+    color_bad = "#FF5555"
 }
 
 order += "wireless _first_" 
