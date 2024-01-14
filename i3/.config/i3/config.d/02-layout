@@ -42,4 +42,3 @@ bindsym $mod+r mode "resize"
 bindsym $mod+Shift+backslash move scratchpad
 bindsym $mod+backslash scratchpad show
 
-
