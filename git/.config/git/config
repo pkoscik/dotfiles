@@ -49,3 +49,7 @@
 [merge]
     conflictstyle = diff3
 
+[rebase]
+    abbreviateCommands = true
+    autoSquash = true
+    stat = true
