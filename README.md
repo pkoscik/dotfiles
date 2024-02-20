@@ -38,3 +38,15 @@ general.autoScroll: false
 mousewheel.min_line_scroll_amount: 120
 mousewheel.default.delta_multiplier_{x,y,z}: 30
 ```
+
+## Touchpad configuration
+
+```text
+Section "InputClass"
+    Identifier "touchpad"
+    Driver "libinput"
+    MatchIsTouchpad "on"
+    Option "Tapping" "on"
+    Option "NaturalScrolling" "true"
+EndSection
+```
