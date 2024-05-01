@@ -15,30 +15,12 @@ PS1='[\u@\h \W]\$ '
 
 
 ################################################################################
-# Exports
-################################################################################
-export EDITOR=hx
-
-
-################################################################################
-# PATH
-################################################################################
-PATH=$PATH:~/.local/bin
-
-
-################################################################################
 # Aliases
 ################################################################################
-alias grep='grep --color=auto'
 alias l="exa -l --icons --no-user --group-directories-first  --time-style long-iso --git"
 alias ll="exa -l --icons --group-directories-first  --time-style long-iso --git --all"
-alias py="python"
 alias xc='xsel -i -b'
 alias q='exit'
-alias da='xdg-open'
-
-# Zellij
-alias za='zellij attach $(zellij ls -s | fzf)'
 
 # Navigation
 alias ..='cd ..'
