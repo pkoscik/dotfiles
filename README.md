@@ -34,7 +34,6 @@ ttf-jetbrains-mono-nerd
 
 ```text
 general.autoScroll: true
-general.autoScroll: false
 mousewheel.min_line_scroll_amount: 120
 mousewheel.default.delta_multiplier_{x,y,z}: 30
 ```
