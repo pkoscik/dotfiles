@@ -22,6 +22,7 @@ firefox
 helix
 i3
 lf
+ripgrep
 rofi
 starship
 stow
@@ -48,4 +49,12 @@ Section "InputClass"
     Option "Tapping" "on"
     Option "NaturalScrolling" "true"
 EndSection
+```
+
+## `/etc/environment` configuration
+
+```text
+EDITOR=hx
+VISUAL=hx
+MOZ_USE_XINPUT2=1
 ```
