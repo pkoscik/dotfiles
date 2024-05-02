@@ -12,3 +12,5 @@ exec --no-startup-id /usr/bin/dunst
 # Screenshot tool
 exec --no-startup-id flameshot
 
+# Wallpaper
+exec --no-startup-id feh --bg-scale ~/.config/i3/wallpaper.*
