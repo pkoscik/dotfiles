@@ -19,8 +19,8 @@ stow <directory name>
 alacritty
 dunst
 eza
-firefox
 feh
+firefox
 flameshot
 fzf
 helix
