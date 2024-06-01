@@ -17,8 +17,12 @@ stow <directory name>
 
 ```text
 alacritty
+dunst
 eza
 firefox
+feh
+flameshot
+fzf
 helix
 i3
 lf
