@@ -9,6 +9,7 @@ bufferline = "multiple"
 cursorline = true
 color-modes = true
 auto-pairs = true
+auto-format = false
 
 [editor.cursor-shape]
 insert = "bar"
@@ -16,12 +17,10 @@ normal = "block"
 select = "underline"
 
 [editor.statusline]
-left = ["mode", "separator", "file-name", "file-modification-indicator"]
-right = ["selections", "file-encoding","spinner", "separator", "diagnostics", "position-percentage"]
-separator = " "
-mode.normal = "nor"
-mode.insert = "ins"
-mode.select = "sel"
+mode.normal = "n"
+mode.insert = "i"
+mode.select = "v"
+
 
 [editor.lsp]
 display-messages = true
@@ -37,7 +36,3 @@ skip-levels = 1
 [keys.normal]
 C-j= "goto_previous_buffer"
 C-k= "goto_next_buffer"
-C-del = ":buffer-close"
-
-# ZelliJ
-C-e = ":sh zellij run --floating --close-on-exit -- tig"
