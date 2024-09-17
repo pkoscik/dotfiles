@@ -41,6 +41,26 @@ function venv {
 	fi
 }
 
+function venvc {
+  if [ ! -n "$1" ]; then
+		venv_name=".venv"
+	else
+		venv_name=$1
+	fi
+	python -m venv "$venv_name"
+	venv
+}
+
+function mkcd {
+  if [ ! -n "$1" ]; then
+    echo "Enter a directory name"
+  elif [ -d $1 ]; then
+    echo "\`$1' already exists"
+  else
+    mkdir $1 && cd $1
+  fi
+}
+
 # Disable 'Alt-N' bind
 for i in "-" {0..9}; do bind -r "\e$i"; done
 
