@@ -11,24 +11,24 @@ configuration {
 
 /* --------------------------------- THEME --------------------------------- */
 * {
-    font: "JetBrains Mono 12";
-    foreground: #f8f8f2;
-    background-color: #282a36;
-    active-background: #6272a4;
-    urgent-background: #ff5555;
-    urgent-foreground: #282a36;
+    font: "Fixed 12";
+    foreground: #000000; /* Black text for Windows 95 feel */
+    background-color: #C0C0C0; /* Light gray background */
+    active-background: #000080; /* Classic Windows 95 blue */
+    urgent-background: #FF0000; /* Red for urgent items */
+    urgent-foreground: #FFFFFF; /* White text on red background */
     selected-background: @active-background;
     selected-urgent-background: @urgent-background;
     selected-active-background: @active-background;
-    separatorcolor: @active-background;
-    bordercolor: @active-background;
+    separatorcolor: #808080; /* Darker gray for borders */
+    bordercolor: #808080;
 }
 
 #window {
     background-color: @background-color;
-    border-color: @bordercolor;
-    border: 1;
-    border-radius: 6;
+    border-color: #000000; /* Black border */
+    border: 2; /* Thicker borders for that old-school look */
+    border-radius: 0; /* No border radius (squared edges) */
     padding: 5;
 }
 
@@ -52,7 +52,7 @@ configuration {
     border: 2px dash 0px 0px ;
     border-color: @bordercolor;
     spacing: 2px ;
-    scrollbar: false;
+    scrollbar: true; /* Enable scrollbar for the Windows 95 effect */
     padding: 2px 0px 0px ;
 }
 
@@ -74,37 +74,37 @@ configuration {
 
 #element.normal.active {
     background-color: @active-background;
-    text-color: @foreground;
+    text-color: #FFFFFF; /* White text on active blue */
 }
 
 #element.selected.normal {
     background-color: @selected-background;
-    text-color: @foreground;
+    text-color: #FFFFFF;
 }
 
 #element.selected.urgent {
     background-color: @selected-urgent-background;
-    text-color: @foreground;
+    text-color: @urgent-foreground;
 }
 
 #element.selected.active {
     background-color: @selected-active-background;
-    text-color: @foreground;
+    text-color: #FFFFFF;
 }
 
 #element.alternate.normal {
-    background-color: @background-color;
+    background-color: #DCDCDC; /* Lighter gray for alternating rows */
     text-color: @foreground;
 }
 
 #element.alternate.urgent {
     background-color: @urgent-background;
-    text-color: @foreground;
+    text-color: @urgent-foreground;
 }
 
 #element.alternate.active {
     background-color: @active-background;
-    text-color: @foreground;
+    text-color: #FFFFFF;
 }
 
 #scrollbar {
@@ -121,7 +121,7 @@ configuration {
 
 #button.selected {
     background-color: @selected-background;
-    text-color: @foreground;
+    text-color: #FFFFFF;
 }
 
 #inputbar {

@@ -5,13 +5,10 @@
 general {
     interval = 1
     colors = true
-    # Theme: dracula
-    # Source: https://github.com/dracula/i3
-    # Licence: MIT
     output_format = "i3bar"
     color_good = "#50FA7B"
     color_degraded = "#F1FA8C"
-    color_bad = "#FF5555"
+    color_bad = "#FF0000"
 }
 
 order += "wireless _first_" 
@@ -27,13 +24,13 @@ order += "tztime local"
 wireless _first_ {
     format_up = " %quality %essid"
     format_down = ""
-    color_good = "#ffffff"
+    color_good = "#000000"
 }
 
 ethernet _first_ {
     format_up = "󰈀 %ip"
     format_down = ""
-    color_good = "#ffffff"
+    color_good = "#000000"
 }
 
 battery 0 {
@@ -53,7 +50,7 @@ battery 0 {
 volume master {
     format = " %volume"
     format_muted = " "
-    color_degraded  = '#ffffff'
+    color_degraded  = '#000000'
     device = "default"
     mixer = "Master"
     mixer_idx = 0

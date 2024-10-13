@@ -3,9 +3,6 @@
 #######################
 
 set $mod Mod4
-font pango:JetBrains Mono 8
+font pango:Fixed 8
 
-# Hide borders
-default_border pixel 1
-default_floating_border pixel 1
 
