@@ -1,0 +1,45 @@
+// -*- mode: jsonc -*-
+{
+    "position": "bottom",
+    "spacing": 0,
+    "modules-left": [
+        "hyprland/workspaces",
+        "hyprland/submap"
+    ],
+    "modules-center": [
+        "clock",
+    ],
+    "modules-right": [
+        "pulseaudio",
+        "network",
+        "cpu",
+        "memory",
+        "tray",
+    ],
+    "clock": {
+        "format": "{:%H:%M}",
+        "format-alt": "{:%Y-%m-%d}",
+        "tooltip": false,
+    },
+    "pulseaudio": {
+        "format": "  {volume}%",
+        "format-muted": "  {volume}%",
+        "tooltip": false,
+    },
+    "network": {
+        "format-ethernet": "󰈀 {ipaddr}",
+        "format-linked": "󰈀 {ifname} NO IP",
+        "tooltip": false,
+    },
+    "cpu": {
+        "format": "  {usage}%",
+        "tooltip": false,
+    },
+    "memory": {
+        "format": "  {}%",
+        "tooltip": false,
+    },
+    "tray": {
+        "spacing": 10
+    },
+}
