@@ -1,0 +1,87 @@
+configuration {
+    terminal: "alacritty";
+    modes: "window,drun,ssh";
+    sidebar-mode: true;
+    show-icons: true;
+    parse-known-hosts: false;
+}
+
+* {
+    font: "JetBrains Mono 12";
+    foreground: #cdd6f4;
+    background-color: #11111b;
+    active-background: #333366;
+    urgent-background: #0F0;
+    urgent-foreground: #00F;
+    selected-background: @active-background;
+    selected-urgent-background: @urgent-background;
+    selected-active-background: @active-background;
+    separatorcolor: @active-background;
+    bordercolor: @active-background;
+}
+
+#window {
+    background-color: @background-color;
+    border-color: @bordercolor;
+    border: 1;
+    border-radius: 10px;
+    padding: 5;
+}
+
+#listview {
+    scrollbar: false;
+}
+
+#inputbar {
+    children: [];
+}
+
+#element.normal.normal {
+    background-color: @background-color;
+    text-color: @foreground;
+}
+
+#element.normal.urgent {
+    background-color: @urgent-background;
+    text-color: @urgent-foreground;
+}
+
+#element.normal.active {
+    background-color: @active-background;
+    text-color: @foreground;
+}
+
+#element.selected.normal {
+    background-color: @selected-background;
+    text-color: @foreground;
+}
+
+#element.selected.urgent {
+    background-color: @selected-urgent-background;
+    text-color: @foreground;
+}
+
+#element.selected.active {
+    background-color: @selected-active-background;
+    text-color: @foreground;
+}
+
+#element.alternate.normal {
+    background-color: @background-color;
+    text-color: @foreground;
+}
+
+#element.alternate.urgent {
+    background-color: @urgent-background;
+    text-color: @foreground;
+}
+
+#element.alternate.active {
+    background-color: @active-background;
+    text-color: @foreground;
+}
+
+#button.selected {
+    background-color: @selected-background;
+    text-color: @foreground;
+}
