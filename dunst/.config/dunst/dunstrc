@@ -1,0 +1,14 @@
+[global]
+format = "<b>%s</b>\n%b"
+
+max_icon_size = 64
+
+origin = top-right
+offset = 22x22
+frame_width = 2
+frame_color = "#b4befe"
+separator_color= frame
+font = "JetBrains Mono 10"
+corner_radius = 7
+background = "#11111B"
+foreground = "#CDD6F4"
