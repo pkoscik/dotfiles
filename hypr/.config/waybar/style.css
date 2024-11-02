@@ -11,11 +11,16 @@ window#waybar {
     margin: 0;
 }
 
-#workspaces {
+#workspaces, #submap{
     color: #b4befe;
     background-color: #11111b;
 
     border-radius: 10px;
+}
+
+#submap {
+    margin-left: 10px;
+    padding: 5px;
 }
 
 #workspaces button {
