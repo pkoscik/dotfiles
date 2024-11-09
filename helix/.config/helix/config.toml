@@ -1,0 +1,38 @@
+theme = "dracula"
+
+[editor]
+true-color = true
+mouse = false
+middle-click-paste = true
+line-number = "relative"
+bufferline = "multiple"
+cursorline = true
+color-modes = true
+auto-pairs = true
+auto-format = false
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.statusline]
+mode.normal = "n"
+mode.insert = "i"
+mode.select = "v"
+
+
+[editor.lsp]
+display-messages = true
+
+[editor.file-picker]
+hidden = true
+
+[editor.indent-guides]
+render = true
+character = "┊"
+skip-levels = 1
+
+[keys.normal]
+C-j= "goto_previous_buffer"
+C-k= "goto_next_buffer"
