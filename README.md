@@ -15,6 +15,34 @@ cd dotfiles
 stow <directory name>
 ```
 
+## Arch packages
+
+```
+alacritty
+brightnessctl
+dunst
+eza
+firefox
+fzf
+git-delta
+helix
+hypridle
+hyprland
+hyprlock
+hyprpaper
+lf
+neofetch
+playerctl
+rofi
+starship
+stow
+tig
+ttf-jetbrains
+ttf-jetbrains-mono
+waybar
+wl-clipboard
+```
+
 ## Firefox configuration
 
 ```
