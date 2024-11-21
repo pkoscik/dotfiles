@@ -14,3 +14,11 @@ git clone https://github.com/pkoscik/dotfiles
 cd dotfiles
 stow <directory name>
 ```
+
+## Firefox configuration
+
+```
+general.autoScroll: true
+mousewheel.min_line_scroll_amount: 120
+mousewheel.default.delta_multiplier_{x,y,z}: 30
+```
