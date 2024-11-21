@@ -37,6 +37,7 @@ rofi
 starship
 stow
 tig
+ttf-font-awesome
 ttf-jetbrains
 ttf-jetbrains-mono
 waybar
