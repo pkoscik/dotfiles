@@ -1,0 +1,55 @@
+[user]
+    name = Patryk Koscik
+    email = koscikpatryk@gmail.com
+
+[status]
+    submoduleSummary = -1
+
+[alias]
+    f = fetch
+    pu = push
+    pufc = push --force-with-lease
+    puff = push --force
+    c = clone
+    cc = checkout
+    st = stash
+    su = submodule status --recursive
+    suu = submodule update --recursive --init
+    st = status
+    lg = log --graph --decorate --oneline --all
+    contrast = log --left-right --graph --cherry-pick --oneline
+
+[rerere]
+    enabled = 1 
+    autoupdate = true
+
+[commit]
+    verbose = true
+
+[push]
+    autoSetupRemote = true
+
+[diff]
+    submodule = log
+    wsErrorHighlight = new,old
+    colorMoved = default
+    colorMovedWS = allow-indentation-change
+
+[core]
+    pager = delta
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true
+    light = false
+    side-by-side = true
+
+[merge]
+    conflictstyle = diff3
+
+[rebase]
+    abbreviateCommands = true
+    autoSquash = true
+    stat = true
