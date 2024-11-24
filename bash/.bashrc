@@ -27,6 +27,7 @@ alias l="exa -l --icons --no-user --group-directories-first  --time-style long-i
 alias ll="exa -l --icons --group-directories-first  --time-style long-iso --git --all"
 alias bm="bashmount"
 alias xc='wl-copy -n'
+alias hx='helix'
 alias q='exit'
 
 # Navigation
