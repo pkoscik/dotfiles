@@ -41,11 +41,20 @@ function venv {
 	venv=($(ls -a | grep venv))
 	len=${#venv[@]}
 	if [[ "$len" -gt 1 ]]; then
-		echo "More than one virtual environment found, aborting!"
-		return 1
+		echo "More than one virtual environment found, select one:"
+		selected_venv=$(printf "%s\n" "${venv[@]}" | fzf)
+		if [[ -z "$selected_venv" ]]; then
+			echo "No virtual environment selected, aborting!"
+			return 1
+		fi
+		echo "Activating virtual environment at $selected_venv"
+		source $selected_venv/bin/activate
+	elif [[ "$len" -eq 1 ]]; then
+		echo "Activating virtual environment at ${venv[0]}"
+		source ${venv[0]}/bin/activate
 	else
-		echo "Activating virtual environment at $venv"
-		source $venv/bin/activate
+		echo "No virtual environment found!"
+		return 1
 	fi
 }
 
