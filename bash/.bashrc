@@ -26,7 +26,7 @@ PS1='[\u@\h \W]\$ '
 alias l="exa -l --icons --no-user --group-directories-first  --time-style long-iso --git"
 alias ll="exa -l --icons --group-directories-first  --time-style long-iso --git --all"
 alias bm="bashmount"
-alias xc='xsel -i -b'
+alias xc='wl-copy -n'
 alias q='exit'
 
 # Navigation
