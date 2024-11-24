@@ -1,5 +1,10 @@
 set main-view = id:yes date:relative-compact author:email-user commit-title:yes,graph,refs
 
+set ignore-case = smart-case
+
+set refresh-mode = periodic
+set refresh-interval = 1
+
 bind main R !git rebase --autosquash -i %(commit)^
 bind diff R !git rebase --autosquash -i %(commit)^
 
