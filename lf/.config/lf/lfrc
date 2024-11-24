@@ -1,0 +1,16 @@
+# Scope
+set previewer ~/.config/lf/scope-lf-wrapper.sh
+map i $LESSOPEN='| ~/.config/lf/scope-lf-wrapper.sh %s' less -R $f
+
+# Icons
+set icons
+
+# File and directory size
+set info size
+set dircounts
+
+# Show hidden files
+map . set hidden!
+
+# Automatic refresh
+set period 1
