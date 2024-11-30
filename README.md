@@ -32,12 +32,17 @@ hypridle
 hyprland
 hyprlock
 hyprpaper
+i3status
 lf
 neofetch
 playerctl
 rofi
 starship
 stow
+sway
+swaybg
+swayidle
+swaylock
 tig
 ttf-font-awesome
 ttf-jetbrains
