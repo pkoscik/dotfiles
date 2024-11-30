@@ -6,6 +6,8 @@ X11/i3 dotfiles are backed up [here](https://github.com/pkoscik/dotfiles-old).
 
 ## Installation
 
+Packages can be installed using the `install.sh` script.
+
 The dotfiles are managed by __GNU Stow__:
 
 ```bash
