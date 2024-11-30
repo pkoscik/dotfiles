@@ -19,6 +19,7 @@ stow <directory name>
 
 ```
 alacritty
+bat
 brightnessctl
 dunst
 eza
@@ -26,6 +27,7 @@ firefox
 fzf
 git-delta
 helix
+highlight
 hypridle
 hyprland
 hyprlock
