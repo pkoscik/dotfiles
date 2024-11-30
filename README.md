@@ -41,8 +41,8 @@ swayidle
 swaylock
 tig
 ttf-font-awesome
-ttf-jetbrains
 ttf-jetbrains-mono
+ttf-jetbrains-mono-nerd
 wl-clipboard
 ```
 
