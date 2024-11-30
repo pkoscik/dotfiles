@@ -28,10 +28,6 @@ fzf
 git-delta
 helix
 highlight
-hypridle
-hyprland
-hyprlock
-hyprpaper
 i3status
 lf
 neofetch
@@ -47,7 +43,6 @@ tig
 ttf-font-awesome
 ttf-jetbrains
 ttf-jetbrains-mono
-waybar
 wl-clipboard
 ```
 
