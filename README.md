@@ -34,7 +34,7 @@ i3status
 lf
 neofetch
 playerctl
-rofi
+rofi-wayland
 starship
 stow
 sway
