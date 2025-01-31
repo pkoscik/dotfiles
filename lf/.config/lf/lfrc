@@ -12,5 +12,9 @@ set dircounts
 # Show hidden files
 map . set hidden!
 
+# Custom executors
+map xj $jless $f
+map xo $xdg-open $f
+
 # Automatic refresh
 set period 1
