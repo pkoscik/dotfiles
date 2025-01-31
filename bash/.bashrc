@@ -29,6 +29,8 @@ alias bm="bashmount"
 alias xc='wl-copy -n'
 alias hx='helix'
 alias q='exit'
+alias g='git'
+alias tig='tig --submodule'
 
 # Navigation
 alias ..='cd ..'
@@ -76,6 +78,22 @@ function mkcd {
   else
     mkdir $1 && cd $1
   fi
+}
+
+function get_zephyr_dts {
+    local platform="$1"
+    local sample="hello_world"
+    local latest_zephyr=$(curl -sS http://zephyr-dashboard.renode.io/zephyr/latest)
+    local temp_file=$(mktemp)  # XXX(pkoscik): needed to suppres the curl output for 404 page
+
+    curl -sS --fail-with-body -o "$temp_file" http://zephyr-dashboard.renode.io/zephyr/"$latest_zephyr"/"$platform"/"$sample"/"$sample".dts
+    local status=$?
+    if [ $status -eq 0 ] && [ -s "$temp_file" ]; then
+        cat "$temp_file"
+    fi
+
+    rm -f "$temp_file"
+    return $status
 }
 
 # Disable 'Alt-N' bind
