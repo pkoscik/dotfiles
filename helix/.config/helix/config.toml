@@ -2,7 +2,6 @@ theme = "dracula"
 
 [editor]
 true-color = true
-mouse = false
 middle-click-paste = true
 line-number = "relative"
 bufferline = "multiple"
