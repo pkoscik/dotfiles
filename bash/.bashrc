@@ -96,6 +96,10 @@ function get_zephyr_dts {
     return $status
 }
 
+function ffsilent {
+	ffmpeg -i "$1" -c copy -an "${1%.*}-nosound.${1#*.}"
+}
+
 # Disable 'Alt-N' bind
 for i in "-" {0..9}; do bind -r "\e$i"; done
 
