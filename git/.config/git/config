@@ -2,6 +2,9 @@
     name = Patryk Koscik
     email = koscikpatryk@gmail.com
 
+[includeIf "gitdir:~/work/**"]
+    path = "~/work/.gitconfig"
+
 [status]
     submoduleSummary = -1
 
