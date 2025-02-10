@@ -31,6 +31,7 @@ alias hx='helix'
 alias q='exit'
 alias g='git'
 alias tig='tig --submodule'
+alias rcp='rsync -auhp --compress --human-readable --info=progress2'
 
 # Navigation
 alias ..='cd ..'
