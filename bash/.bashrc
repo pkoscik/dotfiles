@@ -62,16 +62,6 @@ function venv {
 	fi
 }
 
-function venvc {
-  if [ ! -n "$1" ]; then
-		venv_name=".venv"
-	else
-		venv_name=$1
-	fi
-	python -m venv "$venv_name"
-	venv
-}
-
 function mkcd {
   if [ ! -n "$1" ]; then
     echo "Enter a directory name"
