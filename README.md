@@ -47,6 +47,7 @@ ttf-font-awesome
 ttf-jetbrains-mono
 ttf-jetbrains-mono-nerd
 wl-clipboard
+zoxide
 ```
 
 ## Firefox configuration
