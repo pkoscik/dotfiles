@@ -31,6 +31,7 @@ git-delta
 helix
 highlight
 i3status
+jq
 lazygit
 lf
 mergiraf
