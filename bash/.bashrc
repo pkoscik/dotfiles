@@ -92,6 +92,29 @@ function ffsilent {
 	ffmpeg -i "$1" -c copy -an "${1%.*}-nosound.${1#*.}"
 }
 
+format_json() {
+    if [[ -z "$1" ]]; then
+        echo "Usage: format_json <filename>"
+        return 1
+    fi
+
+    local filename="$1"
+
+    if [[ ! -f "$filename" ]]; then
+        echo "File not found: $filename"
+        return 1
+    fi
+
+    jq . "$filename" > tmp.$.json && mv tmp.$.json "$filename"
+    
+    if [[ $? -eq 0 ]]; then
+        echo "Formatted JSON file: $filename"
+    else
+        echo "Failed to format JSON file: $filename"
+        return 1
+    fi
+}
+
 # Disable 'Alt-N' bind
 for i in "-" {0..9}; do bind -r "\e$i"; done
 
