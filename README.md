@@ -31,6 +31,7 @@ git-delta
 helix
 highlight
 i3status
+lazygit
 lf
 neofetch
 playerctl

@@ -32,6 +32,7 @@ alias q='exit'
 alias g='git'
 alias tig='tig --submodule'
 alias rcp='rsync -auhp --compress --human-readable --info=progress2'
+alias lg='lazygit'
 
 # Navigation
 alias ..='cd ..'
