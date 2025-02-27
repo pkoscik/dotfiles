@@ -47,6 +47,7 @@ tig
 ttf-font-awesome
 ttf-jetbrains-mono
 ttf-jetbrains-mono-nerd
+uv
 wl-clipboard
 zoxide
 ```
