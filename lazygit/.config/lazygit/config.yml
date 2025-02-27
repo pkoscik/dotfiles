@@ -1,0 +1,12 @@
+keybinding:
+  universal:
+    quit: <c-q>
+    return: q
+
+git:
+  scrollHeight: 12
+  allBranchesLogCmd: git log --graph --all --color=always --abbrev-commit --decorate --date=relative  --pretty=fuller
+  branchLogCmd: git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=fuller {{branchName}} --
+  paging:
+    colorArg: always
+    pager: delta --config="" --dark --paging=never --line-numbers
