@@ -33,6 +33,7 @@ highlight
 i3status
 lazygit
 lf
+mergiraf
 neofetch
 playerctl
 rofi-wayland
