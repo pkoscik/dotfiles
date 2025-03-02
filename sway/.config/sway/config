@@ -50,6 +50,9 @@ bindsym $mod+Shift+s exec 'grim -g "$(slurp -d)" - | wl-copy'
 # Swaylock
 bindsym $mod+o exec swaylock -c 000000
 
+# Firefox
+bindsym $mod+w exec firefox
+
 # Focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down
