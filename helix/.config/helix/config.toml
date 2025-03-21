@@ -9,6 +9,7 @@ cursorline = true
 color-modes = true
 auto-pairs = true
 auto-format = false
+jump-label-alphabet = "hjklabcdefgimnopqrstuvwxyz"
 
 [editor.cursor-shape]
 insert = "bar"
@@ -19,13 +20,23 @@ select = "underline"
 mode.normal = "n"
 mode.insert = "i"
 mode.select = "v"
+separator = " "
+left = ["mode", "separator", "register", "version-control", "separator", "spinner"]
+center = ["read-only-indicator", "file-name", "file-modification-indicator", "read-only-indicator"]
+right = ["diagnostics", "selections", "primary-selection-length", "position", "file-encoding", "file-type"]
 
 
 [editor.lsp]
 display-messages = true
+goto-reference-include-declaration = false
 
 [editor.file-picker]
-hidden = true
+hidden = false
+
+[keys.normal.space.c]
+l = ":o ~/.config/helix/languages.toml"
+o = ":config-open"
+r = ":config-reload"
 
 [editor.indent-guides]
 render = true
@@ -35,3 +46,17 @@ skip-levels = 1
 [keys.normal]
 C-j= "goto_previous_buffer"
 C-k= "goto_next_buffer"
+ret = "goto_word"
+
+# This is kinda broken, but screw it
+C-g = [
+  ':sh rm -f /tmp/unique-file',
+  ':insert-output lazygit',
+  ':insert-output echo "\x1b[?1049h\x1b[?2004h" > /dev/tty',
+  ':set mouse false',
+  ':set mouse true',
+  ':redraw',
+]
+
+[keys.select]
+ret = "goto_word"
