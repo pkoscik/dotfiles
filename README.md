@@ -26,6 +26,7 @@ brightnessctl
 dunst
 eza
 firefox
+fish
 fzf
 git-delta
 helix
