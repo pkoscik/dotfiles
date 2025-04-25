@@ -33,6 +33,10 @@ goto-reference-include-declaration = false
 [editor.file-picker]
 hidden = false
 
+[keys.normal."C-r"]
+C-r = [":reload"]
+C-R = [":reload-all"]
+
 [keys.normal.space.c]
 l = ":o ~/.config/helix/languages.toml"
 o = ":config-open"
@@ -47,16 +51,19 @@ skip-levels = 1
 C-j= "goto_previous_buffer"
 C-k= "goto_next_buffer"
 ret = "goto_word"
+C-del = [":buffer-close"]
+C-n = [':new']
+Y = [":yank-join"]
+
+"]"."'" = "@<space>'<C-n><ret>" # Next item from last picker
+"["."'" = "@<space>'<C-p><ret>" # Prev item from last picker
 
 # This is kinda broken, but screw it
-C-g = [
-  ':sh rm -f /tmp/unique-file',
-  ':insert-output lazygit',
-  ':insert-output echo "\x1b[?1049h\x1b[?2004h" > /dev/tty',
-  ':set mouse false',
-  ':set mouse true',
-  ':redraw',
-]
+C-g = [":sh cd $(dirname %{buffer_name}) && git blame --line-porcelain $(basename %{buffer_name}) -L %{cursor_line},%{cursor_line}"]
+
 
 [keys.select]
 ret = "goto_word"
+C-del = [":buffer-close"]
+Y = [":yank-join"]
+C-n = [':new']
