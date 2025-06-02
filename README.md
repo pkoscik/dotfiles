@@ -23,8 +23,10 @@ stow <directory name>
 alacritty
 bat
 brightnessctl
+difftastic
 dunst
 eza
+fd
 firefox
 fish
 fzf
@@ -38,6 +40,8 @@ lf
 mergiraf
 neofetch
 playerctl
+polkit-gnome
+ripgrep
 rofi-wayland
 starship
 stow
@@ -51,7 +55,6 @@ ttf-jetbrains-mono
 ttf-jetbrains-mono-nerd
 uv
 wl-clipboard
-zoxide
 ```
 
 ## Firefox configuration
