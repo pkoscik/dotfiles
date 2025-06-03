@@ -9,6 +9,8 @@ cursorline = true
 color-modes = true
 auto-pairs = true
 auto-format = false
+insert-final-newline = false
+popup-border = "all"
 jump-label-alphabet = "hjklabcdefgimnopqrstuvwxyz"
 
 [editor.cursor-shape]
@@ -25,13 +27,40 @@ left = ["mode", "separator", "register", "version-control", "separator", "spinne
 center = ["read-only-indicator", "file-name", "file-modification-indicator", "read-only-indicator"]
 right = ["diagnostics", "selections", "primary-selection-length", "position", "file-encoding", "file-type"]
 
-
 [editor.lsp]
 display-messages = true
 goto-reference-include-declaration = false
 
 [editor.file-picker]
 hidden = false
+
+[editor.indent-guides]
+render = true
+character = "┊"
+skip-levels = 1
+
+[keys.normal]
+# Do not append '\b' to '*' register value
+"*" = "search_selection"
+"A-*" = ":noop"
+
+# Global search word under current cursor
+"tab" = '@miw*<space>/<ret>'
+
+# Next/Previous items from the last picker
+"]"."'" = "@<space>'<C-n><ret>"
+"["."'" = "@<space>'<C-p><ret>"
+
+# Buffer management
+C-n = [':new']
+C-del = [":buffer-close"]
+C-j= "goto_previous_buffer"
+C-k= "goto_next_buffer"
+
+ret = "goto_word"
+Y = [":yank-join"]
+
+C-g = [":sh fish ~/.config/helix/helix.fish blame %{buffer_name} %{cursor_line}"]
 
 [keys.normal."C-r"]
 C-r = [":reload"]
@@ -42,28 +71,11 @@ l = ":o ~/.config/helix/languages.toml"
 o = ":config-open"
 r = ":config-reload"
 
-[editor.indent-guides]
-render = true
-character = "┊"
-skip-levels = 1
-
-[keys.normal]
-C-j= "goto_previous_buffer"
-C-k= "goto_next_buffer"
-ret = "goto_word"
-C-del = [":buffer-close"]
-C-n = [':new']
-Y = [":yank-join"]
-
-"]"."'" = "@<space>'<C-n><ret>" # Next item from last picker
-"["."'" = "@<space>'<C-p><ret>" # Prev item from last picker
-
-# This is kinda broken, but screw it
-C-g = [":sh cd $(dirname %{buffer_name}) && git blame --line-porcelain $(basename %{buffer_name}) -L %{cursor_line},%{cursor_line}"]
-
-
 [keys.select]
-ret = "goto_word"
+"*" = "search_selection"
+"A-*" = ":noop"
+"tab" = '@miw*<space>/<ret>'
 C-del = [":buffer-close"]
-Y = [":yank-join"]
 C-n = [':new']
+ret = "goto_word"
+Y = [":yank-join"]
