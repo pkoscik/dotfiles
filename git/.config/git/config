@@ -22,6 +22,11 @@
     lg = log --graph --decorate --oneline --all
     contrast = log --left-right --graph --cherry-pick --oneline
 
+    # difftastic
+    dlog = -c diff.external=difft log --ext-diff
+    dshow = -c diff.external=difft show --ext-diff
+    ddiff = -c diff.external=difft diff
+
 [rerere]
     enabled = 1 
     autoupdate = true
