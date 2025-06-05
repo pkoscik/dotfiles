@@ -12,6 +12,7 @@ auto-format = false
 insert-final-newline = false
 popup-border = "all"
 jump-label-alphabet = "hjklabcdefgimnopqrstuvwxyz"
+shell = ["fish", "-c"]
 
 [editor.cursor-shape]
 insert = "bar"
