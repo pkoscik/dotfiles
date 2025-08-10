@@ -14,7 +14,8 @@ formatter = { command = "ruff", args = ["format", "--line-length", "88", "-"] }
 language-servers = [ "ty", "ruff", "pylsp" ]
 
 [[language]]
-name = "Renode repl"
+name = "renode-repl"
 scope = "source.repl"
 comment-tokens = ['//']
 file-types = ["repl"]
+
