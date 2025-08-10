@@ -6,6 +6,7 @@ font pango:JetBrains Mono 8
 
 # Titlebar with minimal borders
 default_border normal
+title_align center
 default_floating_border normal
 smart_borders on
 hide_edge_borders both
@@ -42,6 +43,10 @@ exec_always {
 }
 
 for_window [shell="xwayland"] title_format "[XWayland] %title"
+
+# Disable titlebars for some window types
+for_window [app_id="firefox"] border pixel 1px
+for_window [app_id="Alacritty"] border pixel 1px
 
 ############
 # Bindings #
