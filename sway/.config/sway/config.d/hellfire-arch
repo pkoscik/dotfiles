@@ -1,5 +1,5 @@
 output DP-3 {
-  scale 1.5
+  scale 1
   adaptive_sync true
 }
 
