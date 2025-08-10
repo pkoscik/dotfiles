@@ -33,7 +33,6 @@ fzf
 git-delta
 helix
 highlight
-i3status
 jq
 lazygit
 lf
@@ -54,6 +53,7 @@ ttf-font-awesome
 ttf-jetbrains-mono
 ttf-jetbrains-mono-nerd
 uv
+waybar
 wl-clipboard
 ```
 
