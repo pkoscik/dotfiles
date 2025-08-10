@@ -1,0 +1,67 @@
+@define-color background #282A36;
+@define-color statusline #F8F8F2;
+@define-color separator  #44475A;
+@define-color urgent     #FF5555;
+@define-color inactive   #BFBFBF;
+
+* {
+  border: none;
+  font-family: "JetBrainsMono Nerd Font", monospace;
+  font-size: 12px;
+  min-height: 0;
+}
+
+window#waybar {
+  background-color: @background;
+  color: @statusline;
+}
+
+/* Workspace buttons */
+#workspaces button {
+  padding: 0 5px;
+  background: @background;
+  color: @inactive;
+}
+
+#workspaces button.focused {
+  background: @separator;
+  color: @statusline;
+}
+
+#workspaces button.active {
+  background: @separator;
+  color: @statusline;
+}
+
+#workspaces button.urgent {
+  background: @urgent;
+  color: @statusline;
+}
+
+#workspaces button:hover {
+  background: @separator;
+  color: @statusline;
+}
+
+/* Module padding */
+.modules-right > * > * {
+  padding-left: 6px;
+  padding-right: 6px;
+}
+
+/* Module separators */
+.modules-right > *:not(:last-child) {
+  /* 1px wide gradient border on right that fades at top and bottom */
+  background-image: linear-gradient(to bottom, transparent, @separator 20%, @separator 80%, transparent);
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: 1px 60%;
+}
+
+/* Urgent indicators */
+#battery.warning {
+  color: @urgent;
+}
+#battery.critical {
+  color: @urgent;
+}
