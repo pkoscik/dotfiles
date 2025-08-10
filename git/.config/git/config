@@ -64,4 +64,9 @@
 [rebase]
     abbreviateCommands = true
     autoSquash = true
+    autoStash = true
     stat = true
+
+[pull]
+    autoStash = true
+    ff = only
