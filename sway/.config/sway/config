@@ -4,9 +4,11 @@
 set $mod Mod4
 font pango:JetBrains Mono 8
 
-# Hide borders
-default_border pixel 1
-default_floating_border pixel 1
+# Titlebar with minimal borders
+default_border normal
+default_floating_border normal
+smart_borders on
+hide_edge_borders both
 
 # Keyboard layout
 input * {
