@@ -41,6 +41,7 @@ exec_always {
     gsettings set org.gnome.desktop.interface font-name 'Noto Sans'
 }
 
+for_window [shell="xwayland"] title_format "[XWayland] %title"
 
 ############
 # Bindings #
