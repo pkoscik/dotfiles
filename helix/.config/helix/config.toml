@@ -1,6 +1,7 @@
 theme = "dracula"
 
 [editor]
+editor-config = false
 true-color = true
 middle-click-paste = true
 line-number = "relative"
@@ -10,9 +11,13 @@ color-modes = true
 auto-pairs = true
 auto-format = false
 insert-final-newline = false
+trim-trailing-whitespace = false
 popup-border = "all"
 jump-label-alphabet = "hjklabcdefgimnopqrstuvwxyz"
 shell = ["fish", "-c"]
+
+[editor.soft-wrap]
+enable = true
 
 [editor.cursor-shape]
 insert = "bar"
@@ -51,6 +56,8 @@ skip-levels = 1
 # Next/Previous items from the last picker
 "]"."'" = "@<space>'<C-n><ret>"
 "["."'" = "@<space>'<C-p><ret>"
+
+C-l = ":toggle whitespace.render all none"
 
 # Buffer management
 C-n = [':new']
