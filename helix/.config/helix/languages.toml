@@ -19,3 +19,12 @@ scope = "source.repl"
 comment-tokens = ['//']
 file-types = ["repl"]
 
+[[language]]
+name = "json"
+formatter = { command = "jq" }
+
+# XXX(pkoscik): this is hack
+# jq dies when attempting to parse a `jsonc` file
+[[language]]
+name = "jsonc"
+formatter = { command = "jq" }
