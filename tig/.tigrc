@@ -2,11 +2,13 @@ set main-view = id:yes date:relative-compact author:email-user commit-title:yes,
 
 set ignore-case = smart-case
 
+set ignore-space = all
+
 set refresh-mode = periodic
 set refresh-interval = 1
 
-bind main R !git rebase --autosquash -i %(commit)^
-bind diff R !git rebase --autosquash -i %(commit)^
+bind main R !git rebase --autostash --autosquash -i %(commit)^
+bind diff R !git rebase --autostash --autosquash -i %(commit)^
 
 bind status a !git commit --amend
 bind status A !git commit --amend --no-edit
