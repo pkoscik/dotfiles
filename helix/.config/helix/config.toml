@@ -62,6 +62,8 @@ ret = "goto_word"
 Y = [":yank-join"]
 
 C-g = [":sh fish ~/.config/helix/helix.fish blame %{buffer_name} %{cursor_line}"]
+C-y = [":sh fish ~/.config/helix/helix.fish copy-url %{buffer_name} %{cursor_line}"]
+C-t = [":sh fish ~/.config/helix/helix.fish goto-issue %{buffer_name} %{cursor_line}"]
 
 [keys.normal."C-r"]
 C-r = [":reload"]
