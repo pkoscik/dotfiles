@@ -32,10 +32,6 @@ configuration {
     scrollbar: false;
 }
 
-#inputbar {
-    children: [];
-}
-
 #element.normal.normal {
     background-color: @background-color;
     text-color: @foreground;
