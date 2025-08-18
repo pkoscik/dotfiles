@@ -27,6 +27,9 @@
     dshow = -c diff.external=difft show --ext-diff
     ddiff = -c diff.external=difft diff
 
+    # 🙏🙏🙏
+    dc = "!git checkout $(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')"
+
 [rerere]
     enabled = 1 
     autoupdate = true
