@@ -27,7 +27,7 @@
     "disable-scroll-wraparound": true
   },
   "sway/scratchpad": {
-    "format": " {count}",
+    "format": "  {count}",
     "show-empty": false,
   },
   "sway/window": {
