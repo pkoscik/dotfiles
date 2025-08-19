@@ -74,6 +74,9 @@ bindsym $mod+d exec rofi -show drun
 # Grim
 bindsym $mod+Shift+s exec 'grim -g "$(slurp -d)" - | wl-copy'
 
+# OCR
+bindsym $mod+c exec '~/.config/sway/scripts/ocr.sh'
+
 # Swaylock
 bindsym $mod+o exec swaylock -c 000000
 
