@@ -20,6 +20,7 @@
     "pulseaudio",
     "clock",
     "tray",
+    "custom/wireguard-manager",
     "custom/power"
   ],
   "sway/workspaces": {
@@ -96,6 +97,16 @@
   "clock": {
     "format": " {:%m-%d  %I:%M}",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+  },
+  "custom/wireguard-manager": {
+    "exec": "bash $HOME/.config/waybar/resources/wireguard-manager.sh -s",
+    "format": "wg: {icon}",
+    "format-icons": {
+      "connected": "up",
+      "disconnected": "down"
+    },
+    "return-type": "json",
+    "interval": 5
   },
   "custom/power": {
     "format": "⏻ ",
