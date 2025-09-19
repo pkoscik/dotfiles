@@ -56,17 +56,17 @@ switch $command
 
     case copy-url
         set reposiory (git remote get-url origin | cut -d ':' -f 2 | cut -d '.' -f 1)
-        set branch (git branch --show-current)
-        if test "$branch" = ""
-            set branch "master"
+        set ref (git rev-parse HEAD)
+        if test "$ref" = ""
+            set ref "master"
         end
         set relative_file (echo $file | string replace $repo_dir "")
 
         if test "$is_github" = "true"
             # GitHub format
-            open_or_print_url "$giturl/blob/$branch$relative_file#L$line"
+            open_or_print_url "$giturl/blob/$ref$relative_file#L$line"
         else
             # Gitlab format
-            open_or_print_url "https://$domain/git/repositories/$reposiory/blob/$branch$relative_file#L$line"
+            open_or_print_url "https://$domain/git/repositories/$reposiory/blob/$ref$relative_file#L$line"
         end
 end
