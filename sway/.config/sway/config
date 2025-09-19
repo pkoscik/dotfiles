@@ -51,6 +51,11 @@ for_window [app_id="Alacritty"] border pixel 1px
 # Always float some windows
 for_window [app_id="^firefox$" title=".* - Bitwarden — Mozilla Firefox$"] floating enable
 for_window [instance="speedcrunch"] floating enable
+for_window [instance="slack"] floating enable
+
+# Bluetui applet
+for_window [app_id="bluetui"] border pixel 1px
+for_window [app_id="bluetui"] floating enable
 
 # ... and some sane defaults
 for_window [window_role="pop-up"] floating enable
