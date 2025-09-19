@@ -28,3 +28,13 @@ formatter = { command = "jq" }
 [[language]]
 name = "jsonc"
 formatter = { command = "jq" }
+
+# https://github.com/euclio/mdpls
+# cargo install --git https://github.com/euclio/mdpls
+[[language]]
+name = "markdown"
+language-servers = ["mdpls"]
+
+[language-server.mdpls]
+command = "mdpls"
+config = { markdown.preview.auto = false }
