@@ -20,6 +20,7 @@
     "pulseaudio",
     "clock",
     "tray",
+    "custom/bluetooth-manager",
     "custom/wireguard-manager",
     "custom/power"
   ],
@@ -107,6 +108,10 @@
     },
     "return-type": "json",
     "interval": 5
+  },
+  "custom/bluetooth-manager": {
+    "format": "bluetooth",
+    "on-click": "alacritty --class 'bluetui' --command 'bluetui'"
   },
   "custom/power": {
     "format": "⏻ ",
