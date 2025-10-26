@@ -52,6 +52,7 @@ tig
 ttf-font-awesome
 ttf-jetbrains-mono
 ttf-jetbrains-mono-nerd
+udiskie
 uv
 waybar
 wl-clipboard
