@@ -16,7 +16,7 @@ input * {
     xkb_layout "pl"
 }
 
-# Wallpaper
+# Wallpaper (swaybg)
 output * bg ~/.config/sway/wallpaper.jpg fill
 
 
@@ -32,13 +32,22 @@ exec swayidle -w \
          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
          before-sleep 'swaylock -f -c 000000'
 
-# polkit-gnome
+# Polkit GUI (polkit-gnome)
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
-# gtk theme
+# XXX(pkoscik): This is _really_ baaaad.
+# Never use this on multi-user setups/machines.
+# Allow access to the X Server (xorg-xhost)
+exec {
+    xhost +SI:localuser:root
+    xhost +SI:localuser:pkoscik
+}
+
+# GTK theme (gnome-themes-extra)
 exec_always {
     gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
     gsettings set org.gnome.desktop.interface icon-theme 'breeze-dark'
+    gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
     gsettings set org.gnome.desktop.interface cursor-theme 'breeze_cursors'
     gsettings set org.gnome.desktop.interface font-name 'Noto Sans'
 }
@@ -48,6 +57,7 @@ for_window [shell="xwayland"] title_format "[XWayland] %title"
 # Disable titlebars for some window types
 for_window [app_id="firefox"] border pixel 1px
 for_window [app_id="Alacritty"] border pixel 1px
+for_window [app_id="signal"] border pixel 1px
 
 # Always float some windows
 for_window [app_id="^firefox$" title=".* - Bitwarden — Mozilla Firefox$"] floating enable
@@ -190,7 +200,6 @@ client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
 # Host specific configuration #
 ###############################
 include ~/.config/sway/config.d/"$(cat /etc/hostname)"
-
 
 include /etc/sway/config.d/*
 
