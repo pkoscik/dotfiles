@@ -15,6 +15,12 @@ trim-trailing-whitespace = false
 popup-border = "all"
 jump-label-alphabet = "hjklabcdefgimnopqrstuvwxyz"
 shell = ["fish", "-c"]
+rainbow-brackets = true
+end-of-line-diagnostics = "disable"
+
+[editor.inline-diagnostics]
+cursor-line = "disable"
+other-lines = "disable"
 
 [editor.soft-wrap]
 enable = true
@@ -28,10 +34,30 @@ select = "underline"
 mode.normal = "n"
 mode.insert = "i"
 mode.select = "v"
-separator = " "
-left = ["mode", "separator", "register", "version-control", "separator", "spinner"]
-center = ["read-only-indicator", "file-name", "file-modification-indicator", "read-only-indicator"]
-right = ["diagnostics", "selections", "primary-selection-length", "position", "file-encoding", "file-type"]
+separator = "|"
+left = [
+  "mode",
+  "spacer",
+  "register",
+  "version-control",
+  "spacer",
+  "spinner"
+]
+center = [
+  "read-only-indicator",
+  "file-name",
+  "file-modification-indicator",
+  "read-only-indicator",
+]
+right = [
+  "diagnostics",
+  "selections",
+  "primary-selection-length",
+  "position",
+  "file-encoding",
+  "file-type",
+  "file-indent-style",
+]
 
 [editor.lsp]
 display-messages = true
@@ -44,6 +70,10 @@ hidden = false
 render = true
 character = "┊"
 skip-levels = 1
+
+[editor.word-completion]
+enable = true
+trigger-length = 4
 
 [keys.normal]
 # Do not append '\b' to '*' register value
@@ -58,6 +88,7 @@ skip-levels = 1
 "["."'" = "@<space>'<C-p><ret>"
 
 C-l = ":toggle whitespace.render all none"
+C-L = ":toggle soft-wrap.enable"
 
 # Buffer management
 C-n = [':new']
@@ -65,7 +96,7 @@ C-del = [":buffer-close"]
 C-j= "goto_previous_buffer"
 C-k= "goto_next_buffer"
 
-ret = "goto_word"
+ret = "@gw"
 Y = [":yank-join"]
 
 C-g = [":sh fish ~/.config/helix/helix.fish blame %{buffer_name} %{cursor_line}"]
@@ -87,5 +118,5 @@ r = ":config-reload"
 "tab" = '@miw*<space>/<ret>'
 C-del = [":buffer-close"]
 C-n = [':new']
-ret = "goto_word"
+ret = "@gw"
 Y = [":yank-join"]
