@@ -113,6 +113,7 @@ bindsym $mod+Shift+l move right
 
 # Windows
 bindsym $mod+f fullscreen
+bindsym $mod+shift+f fullscreen toggle global
 bindsym $mod+e layout toggle split
 bindsym $mod+a focus parent
 bindsym $mod+Shift+space floating toggle
