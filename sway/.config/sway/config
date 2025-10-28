@@ -27,6 +27,7 @@ exec blueman-applet
 exec nm-applet
 exec dunst
 exec udiskie
+exec clipse -listen
 exec swayidle -w \
          timeout 300 'swaylock -f -c 000000' \
          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
@@ -72,6 +73,8 @@ for_window [app_id="bluetui"] floating enable
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="About"] floating enable
 
+for_window [app_id="clipse"] floating enable, move position center, resize set 80ppt 80ppt, border pixel 1px
+
 ############
 # Bindings #
 ############
@@ -98,6 +101,9 @@ bindsym $mod+o exec swaylock -c 000000
 
 # Firefox
 bindsym $mod+w exec firefox
+
+# Clipse
+bindsym $mod+V exec alacritty --class clipse -e clipse
 
 # Focus
 bindsym $mod+h focus left

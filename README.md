@@ -23,6 +23,7 @@ stow <directory name>
 alacritty
 bat
 brightnessctl
+clipse
 difftastic
 dunst
 eza
