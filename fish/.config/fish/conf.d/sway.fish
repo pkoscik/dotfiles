@@ -13,5 +13,8 @@ if test (tty) = "/dev/tty1"
     set -x XDG_CURRENT_DESKTOP sway
     set -x ELECTRON_OZONE_PLATFORM_HINT wayland
 
+    set -x EDITOR helix
+    set -x VISUAL helix
+    set -x SSH_AUTH_SOCK "$XDG_RUNTIME_DIR/ssh-agent.socket"
     exec sway
 end

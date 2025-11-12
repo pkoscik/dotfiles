@@ -1,7 +1,3 @@
-set -x EDITOR helix
-set -x VISUAL helix
-set -x SSH_AUTH_SOCK "$XDG_RUNTIME_DIR/ssh-agent.socket"
-
 set fish_greeting "$(date +%c)"
 
 if status is-interactive
