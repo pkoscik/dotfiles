@@ -1,0 +1,1 @@
+/home/pkoscik/.config/secret/secret.fish
