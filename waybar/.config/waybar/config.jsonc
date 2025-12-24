@@ -20,6 +20,7 @@
     "tray",
     "bluetooth",
     "custom/wireguard-manager",
+    "custom/arch-updates",
     "custom/power"
   ],
   "sway/workspaces": {
@@ -108,6 +109,12 @@
     },
     "return-type": "json",
     "interval": 5,
+    "hide-empty-text": true
+  },
+  "custom/arch-updates": {
+    "exec": "bash $HOME/.config/waybar/resources/arch_updates.sh -s",
+    "on-click": "bash $HOME/.config/waybar/resources/arch_updates.sh -u",
+    "interval": 3600,
     "hide-empty-text": true
   },
   "bluetooth": {
