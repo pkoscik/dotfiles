@@ -66,8 +66,8 @@ for_window [instance="speedcrunch"] floating enable
 for_window [instance="slack"] floating enable
 
 # Tray applets
-for_window [app_id="bluetui|wiremix"] border pixel 1px
-for_window [app_id="bluetui|wiremix"] floating enable
+for_window [app_id="bluetui|wiremix|popup"] border pixel 1px
+for_window [app_id="bluetui|wiremix|popup"] floating enable
 
 # ... and some sane defaults
 for_window [window_role="pop-up"] floating enable
