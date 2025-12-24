@@ -5,9 +5,7 @@
   "modules-left": [
     "sway/workspaces",
     "sway/scratchpad",
-    "sway/mode"
-  ],
-  "modules-center": [
+    "sway/mode",
     "sway/window"
   ],
   "modules-right": [
@@ -20,7 +18,7 @@
     "pulseaudio",
     "clock",
     "tray",
-    "custom/bluetooth-manager",
+    "bluetooth",
     "custom/wireguard-manager",
     "custom/power"
   ],
@@ -30,18 +28,18 @@
   },
   "sway/scratchpad": {
     "format": "  {count}",
-    "show-empty": false,
+    "show-empty": false
   },
   "sway/window": {
     "format": "{title}",
     "max-length": 50,
     "rewrite": {
-      "(.*) — Mozilla Firefox": " $1",
+      "(.*) — Mozilla Firefox": "  $1",
       "helix (.*)": "ed [$1]"
     }
   },
   "network": {
-    "format-wifi": "  {signalStrength}% {essid} ({ipaddr})",
+    "format-wifi": "  {signalStrength}% {essid}",
     "format-ethernet": "󰈀 {ipaddr}",
     "format-disconnected": "",
     "tooltip-format": "{ifname} via {gwaddr} {icon}",
@@ -64,6 +62,7 @@
       "",
       ""
     ],
+    "format-charging": " {capacity}% ({time} {power:.1f}w)",
     "interval": 3
   },
   "cpu": {
@@ -87,13 +86,13 @@
   },
   "pulseaudio": {
     "format": " {volume}%",
-    "format-muted": "",
+    "format-muted": " ",
     "format-icons": [
       "",
       "",
       ""
     ],
-    "on-click": "pavucontrol"
+    "on-click": "alacritty --class 'wiremix' --command wiremix --tab output"
   },
   "clock": {
     "format": " {:%m-%d  %I:%M}",
@@ -101,16 +100,23 @@
   },
   "custom/wireguard-manager": {
     "exec": "bash $HOME/.config/waybar/resources/wireguard-manager.sh -s",
+    "on-click": "bash $HOME/.config/waybar/resources/wireguard-manager.sh -t",
     "format": "wg: {icon}",
     "format-icons": {
       "connected": "up",
       "disconnected": "down"
     },
     "return-type": "json",
-    "interval": 5
+    "interval": 5,
+    "hide-empty-text": true
   },
-  "custom/bluetooth-manager": {
-    "format": "bluetooth",
+  "bluetooth": {
+    "format": " {status}",
+    "format-disabled": "",
+    "format-connected": " {num_connections} connected",
+    "tooltip-format": "{controller_alias}\t{controller_address}",
+    "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
     "on-click": "alacritty --class 'bluetui' --command 'bluetui'"
   },
   "custom/power": {

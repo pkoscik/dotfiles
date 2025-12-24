@@ -49,6 +49,10 @@ window#waybar {
   padding-right: 6px;
 }
 
+.modules-left> * > * {
+  padding-right: 6px;
+}
+
 /* Module separators */
 .modules-right > *:not(:last-child) {
   /* 1px wide gradient border on right that fades at top and bottom */
