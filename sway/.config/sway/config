@@ -59,6 +59,7 @@ for_window [shell="xwayland"] title_format "[XWayland] %title"
 for_window [app_id="firefox"] border pixel 1px
 for_window [app_id="Alacritty"] border pixel 1px
 for_window [app_id="signal"] border pixel 1px
+for_window [app_id="Slack"] boarder pixel 1px
 
 # Always float some windows
 for_window [app_id="^firefox$" title=".* - Bitwarden — Mozilla Firefox$"] floating enable
