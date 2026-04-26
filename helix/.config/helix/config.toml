@@ -15,7 +15,7 @@ trim-trailing-whitespace = false
 popup-border = "all"
 jump-label-alphabet = "hjklabcdefgimnopqrstuvwxyz"
 shell = ["fish", "-c"]
-rainbow-brackets = true
+# rainbow-brackets = true
 end-of-line-diagnostics = "disable"
 
 [editor.inline-diagnostics]
@@ -71,9 +71,9 @@ render = true
 character = "┊"
 skip-levels = 1
 
-[editor.word-completion]
-enable = true
-trigger-length = 4
+# [editor.word-completion]
+# enable = true
+# trigger-length = 4
 
 [keys.normal]
 # Do not append '\b' to '*' register value
