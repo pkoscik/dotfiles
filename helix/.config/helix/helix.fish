@@ -5,7 +5,7 @@ set file (realpath $argv[2])
 set line $argv[3]
 
 function open_or_print_url
-    if test -n "$DISPLAY" -o -n "$DISPLAY"
+    if test -n "$DISPLAY"
         xdg-open "$argv[1]"
     else
         echo "$argv[1]"
@@ -55,7 +55,7 @@ switch $command
         end
 
     case copy-url
-        set reposiory (git remote get-url origin | cut -d ':' -f 2 | cut -d '.' -f 1)
+        set repository (git remote get-url origin | cut -d ':' -f 2 | cut -d '.' -f 1)
         set ref (git rev-parse HEAD)
         if test "$ref" = ""
             set ref "master"
@@ -67,6 +67,6 @@ switch $command
             open_or_print_url "$giturl/blob/$ref$relative_file#L$line"
         else
             # Gitlab format
-            open_or_print_url "https://$domain/git/repositories/$reposiory/blob/$ref$relative_file#L$line"
+            open_or_print_url "https://$domain/git/repositories/$repository/blob/$ref$relative_file#L$line"
         end
 end
