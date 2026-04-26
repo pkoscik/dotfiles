@@ -1,5 +1,24 @@
+[env]
+TERM = "xterm-256color"
+WINIT_X11_SCALE_FACTOR = "1"
+
+[window]
+dynamic_padding = true
+decorations = "full"
+decorations_theme_variant = "Dark"
+title = "Alacritty"
+
+[window.dimensions]
+columns = 100
+lines = 30
+
+[window.class]
+instance = "Alacritty"
+general = "Alacritty"
+
 [scrolling]
 history = 100_000
+multiplier = 3
 
 [font]
 size = 12.0
@@ -9,16 +28,23 @@ normal = {family = "JetBrains Mono", style = "Regular"}
 vi_mode_style = "Block"
 style = {blinking = "Off", shape = "Beam"}
 unfocused_hollow = true
+thickness = 0.15
+
+[selection]
+semantic_escape_chars = ",│`|:\"' ()[]{}<>\t"
+save_to_clipboard = true
+
+[mouse]
+hide_when_typing = true
 
 [keyboard]
 bindings = [
   {action = "SpawnNewInstance", key = "Return", mods = "Control|Shift"} ,
 ]
 
+[[mouse.bindings]]
+mouse = "Middle"
+action = "PasteSelection"
+
 [general]
-
 live_config_reload = true
-import = [
-  "~/.config/alacritty/colors.toml",
-]
-
