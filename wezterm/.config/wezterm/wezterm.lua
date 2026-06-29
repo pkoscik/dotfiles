@@ -70,4 +70,6 @@ table.insert(copy_mode, {
 })
 config.key_tables = { copy_mode = copy_mode }
 
+config.adjust_window_size_when_changing_font_size = false
+
 return config
