@@ -58,6 +58,7 @@ for_window [shell="xwayland"] title_format "[XWayland] %title"
 # Disable titlebars for some window types
 for_window [app_id="firefox"] border pixel 1px
 for_window [app_id="Alacritty"] border pixel 1px
+for_window [app_id="org.wezfurlong.wezterm"] border pixel 1px
 for_window [app_id="signal"] border pixel 1px
 for_window [app_id="Slack"] boarder pixel 1px
 
@@ -86,7 +87,7 @@ bindsym $mod+Shift+e exec swaynag -t warning -m 'Oh brother' -B 'Yup' 'swaymsg e
 floating_modifier $mod normal
 
 # Alacritty
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec wezterm
 
 # Rofi
 bindsym $mod+d exec rofi -show drun
