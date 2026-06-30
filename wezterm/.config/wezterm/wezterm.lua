@@ -5,6 +5,7 @@ local is_linux = wezterm.target_triple:find("linux") ~= nil
 
 config.enable_kitty_keyboard = true
 
+config.color_scheme = "Dracula"
 config.font = wezterm.font("JetBrains Mono", { weight = "Regular" })
 config.font_size = 12.0
 config.initial_cols = 100
