@@ -45,6 +45,8 @@ local search_insensitive = act.Multiple({
 
 -- Keybindings
 config.keys = {
+  { key = "l", mods = "CTRL", action = act.DisableDefaultAssignment },
+  { key = "l", mods = "CTRL|SHIFT", action = act.DisableDefaultAssignment },
   { key = "Return", mods = "CTRL|SHIFT", action = act.SpawnWindow },
   { key = "f", mods = "CTRL|SHIFT", action = search_insensitive },
   {
