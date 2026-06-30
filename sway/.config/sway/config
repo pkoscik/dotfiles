@@ -57,6 +57,7 @@ for_window [shell="xwayland"] title_format "[XWayland] %title"
 
 # Disable titlebars for some window types
 for_window [app_id="firefox"] border pixel 1px
+for_window [app_id="google-chrome"] border pixel 1px
 for_window [app_id="Alacritty"] border pixel 1px
 for_window [app_id="org.wezfurlong.wezterm"] border pixel 1px
 for_window [app_id="signal"] border pixel 1px
@@ -102,7 +103,7 @@ bindsym $mod+c exec '~/.config/sway/scripts/ocr.sh'
 bindsym $mod+o exec swaylock -c 000000
 
 # Firefox
-bindsym $mod+w exec firefox
+bindsym $mod+w exec google-chrome-stable
 
 # Clipse
 bindsym $mod+V exec alacritty --class clipse -e clipse
