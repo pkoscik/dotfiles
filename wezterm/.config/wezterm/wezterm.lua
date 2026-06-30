@@ -1,5 +1,9 @@
 local wezterm = require("wezterm")
 local config = wezterm.config_builder()
+local is_macos = wezterm.target_triple:find("darwin") ~= nil
+local is_linux = wezterm.target_triple:find("linux") ~= nil
+
+config.enable_kitty_keyboard = true
 
 config.font = wezterm.font("JetBrains Mono", { weight = "Regular" })
 config.font_size = 12.0
@@ -12,9 +16,12 @@ config.hide_tab_bar_if_only_one_tab = true
 
 config.scrollback_lines = 10000000
 
--- Always confirm before closing
-config.window_close_confirmation = "AlwaysPrompt"
-config.skip_close_confirmation_for_processes_named = {}
+if is_linux then
+  config.window_close_confirmation = "NeverPrompt"
+else
+  config.window_close_confirmation = "AlwaysPrompt"
+  config.skip_close_confirmation_for_processes_named = {}
+end
 
 -- macOS: treat both Option keys as Alt
 config.send_composed_key_when_left_alt_is_pressed = false
@@ -25,7 +32,6 @@ config.hide_mouse_cursor_when_typing = true
 config.selection_word_boundary = " \t\n{}[]()<>,│`|:\"'"
 
 local act = wezterm.action
-local is_macos = wezterm.target_triple:find("darwin") ~= nil
 
 -- WezTerm ignores the match type when Search is given an empty string, so it
 -- always opens case-sensitive (wezterm issue #7236). Workaround: seed a
@@ -43,7 +49,7 @@ config.keys = {
   {
     key = "w",
     mods = is_macos and "SUPER" or "CTRL|SHIFT",
-    action = act.CloseCurrentTab({ confirm = true }),
+    action = act.CloseCurrentTab({ confirm = not is_linux }),
   },
 }
 
