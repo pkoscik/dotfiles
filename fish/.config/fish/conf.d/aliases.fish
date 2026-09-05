@@ -5,7 +5,11 @@ if status is-interactive
     alias manfind "man -k . | fzf | cut -d ' ' -f 1,2 | tr -d '\(\)' | xargs man"
     alias renode 'env STARTUP_COMMAND="include @~/.renoderc" renode'
 
-    alias xc 'wl-copy -n'
+    if test (uname) = Darwin
+        alias xc pbcopy
+    else
+        alias xc 'wl-copy -n'
+    end
     abbr q 'exit'
     abbr g 'git'
     abbr tig 'tig --submodule'
