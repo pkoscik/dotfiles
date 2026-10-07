@@ -1,10 +1,11 @@
-[language-server.csharp]
-# cargo install --git https://github.com/SofusA/csharp-language-server
-command = "csharp-language-server"
+# https://github.com/dotnet/roslyn/tree/main/src/LanguageServer/Microsoft.CodeAnalysis.LanguageServer
+[language-server.roslyn-language-server]
+command = "roslyn-language-server"
+args = ["--stdio", "--autoLoadProjects", "--telemetryLevel=all", "--logLevel=Information"]
 
 [[language]]
 name = "c-sharp"
-language-servers = ["csharp"]
+language-servers = ["roslyn-language-server"]
 file-types = ["cs", "csproj", "sln"]
 auto-format = false
 
