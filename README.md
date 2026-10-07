@@ -37,7 +37,6 @@ highlight
 jq
 lazygit
 lf
-mergiraf
 neofetch
 pacman-contrib
 playerctl
