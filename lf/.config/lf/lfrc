@@ -17,6 +17,7 @@ map xj $jless $f
 map xo $xdg-open $f
 map xd $~/.config/lf/smart-objdump.sh $f
 map xD $~/.config/lf/smart-objdump.sh $f --extended
+map xp $realpath $f | wl-copy -n
 
 # Automatic refresh
 set period 1
