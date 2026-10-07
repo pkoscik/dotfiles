@@ -39,6 +39,7 @@ lazygit
 lf
 mergiraf
 neofetch
+pacman-contrib
 playerctl
 polkit-gnome
 ripgrep
