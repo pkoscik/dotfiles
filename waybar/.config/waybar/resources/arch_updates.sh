@@ -6,8 +6,12 @@ else
   command="pacman"
 fi
 
+# checkupdates (pacman-contrib) syncs a temp db; plain -Qu only sees the last -Sy
 count_updates() {
-  "$command" -Qu 2>/dev/null | wc -l
+  {
+    checkupdates
+    [[ "$command" == "yay" ]] && yay -Qua
+  } 2>/dev/null | wc -l
 }
 
 run_update() {
