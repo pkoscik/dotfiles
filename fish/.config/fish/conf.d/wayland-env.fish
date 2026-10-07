@@ -1,7 +1,7 @@
 if test (uname) = "Linux"
     set -x CLUTTER_BACKEND wayland
     set -x ECORE_EVAS_ENGINE wayland_egl
-    set -x ELM_ENGINE wayland_wgl
+    set -x ELM_ENGINE wayland_egl
     set -x GDK_BACKEND wayland
     set -x _JAVA_AWT_WM_NONREPARENTING 1
     set -x MOZ_ENABLE_WAYLAND 1
