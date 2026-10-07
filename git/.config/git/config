@@ -15,7 +15,6 @@
     puff = push --force
     c = clone
     cc = checkout
-    st = stash
     su = submodule status --recursive
     suu = submodule update --recursive --init
     st = status
