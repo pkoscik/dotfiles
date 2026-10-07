@@ -31,7 +31,7 @@
     dc = "!git checkout $(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')"
 
 [rerere]
-    enabled = 1 
+	enabled = true
     autoupdate = true
 
 [commit]
@@ -55,7 +55,7 @@
 [delta]
     navigate = true
     light = false
-    side-by-side = false
+    side-by-side = true
 
 [merge]
     conflictstyle = diff3
@@ -65,7 +65,11 @@
     autoSquash = true
     autoStash = true
     stat = true
+    instructionFormat = (%an <%ae>) %s
 
 [pull]
     autoStash = true
     ff = only
+
+[blame]
+    ignoreRevsFile = :(optional).git-blame-ignore-revs
