@@ -61,12 +61,18 @@ for_window [app_id="google-chrome"] border pixel 1px
 for_window [app_id="Alacritty"] border pixel 1px
 for_window [app_id="org.wezfurlong.wezterm"] border pixel 1px
 for_window [app_id="signal"] border pixel 1px
-for_window [app_id="Slack"] boarder pixel 1px
+for_window [app_id="slack"] border pixel 1px
+for_window [app_id="anytype"] border none
+# Spotify is xwayland: match on class, not app_id
+for_window [class="Spotify"] border none
 
 # Always float some windows
-for_window [app_id="^firefox$" title=".* - Bitwarden — Mozilla Firefox$"] floating enable
+# Bitwarden: chrome extension popout (any profile) + desktop app
+# nngceck... = Bitwarden's Chrome Web Store extension id (stable; app_id is chrome-<id>-<profile>)
+for_window [app_id="^chrome-nngceckbapebfimnlniiiahkandclblb-"] floating enable, border none
+for_window [app_id="^Bitwarden$"] floating enable, border none
 for_window [instance="speedcrunch"] floating enable
-for_window [instance="slack"] floating enable
+for_window [app_id="slack"] floating enable
 
 # Tray applets
 for_window [app_id="bluetui|wiremix|popup"] border pixel 1px
