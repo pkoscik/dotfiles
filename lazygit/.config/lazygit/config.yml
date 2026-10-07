@@ -1,6 +1,49 @@
+os:
+  editPreset: "helix (hx)"
+
 gui:
   scrollHeight: 16
   showCommandLog: false
+  sidePanelWidth: 0.3
+  nerdFontsVersion: "3"
+  showNumstatInFilesView: true
+  showDivergenceFromBaseBranch: arrowAndNumber
+  showRandomTip: false
+  expandFocusedSidePanel: true
+  # portrait when <=210 cols AND >=36 rows. vertical screens: 144x38, 205x74
+  # wide normal monitors (>210 cols) keep the side-by-side layout
+  portraitMode: auto
+  portraitModeAutoMaxWidth: 210
+  portraitModeAutoMinHeight: 36
+  enlargedSideViewLocation: top
 
 git:
   autoStageResolvedConflicts: false
+  diffRenderers:
+    - type: extDiff
+      command: difft --color=always --display=side-by-side --context={{diffContext}}
+      name: difft-sbs
+    - type: extDiff
+      command: difft --color=always --display=inline --context={{diffContext}}
+      name: difft-inline
+
+promptToReturnFromSubprocess: false
+
+customCommands:
+  - key: "<c-g>"
+    context: localBranches
+    command: git dc
+    description: checkout default branch
+  - key: "<c-n>"
+    context: global
+    description: jump to any submodule of the root repo (q to come back)
+    prompts:
+      - type: menuFromCommand
+        title: Submodule
+        key: Path
+        command: sh -c '$HOME/.config/lazygit/submodules.sh'
+        filter: '^(?P<label>[^|]*)\|(?P<path>.*)$'
+        labelFormat: '{{ .label }}'
+        valueFormat: '{{ .path }}'
+    command: lazygit -p {{.Form.Path | quote}}
+    output: terminal
