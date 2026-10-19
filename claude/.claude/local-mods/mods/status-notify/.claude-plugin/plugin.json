@@ -1,0 +1,31 @@
+{
+  "name": "status-notify",
+  "version": "0.4.0",
+  "description": "notify-send when a long turn finishes or a rate-limit window runs hot (with reset time); toast when context fills up.",
+  "userConfig": {
+    "notifyAfterSeconds": {
+      "type": "number",
+      "title": "Notify after (seconds)",
+      "description": "Send a desktop notification when a turn takes at least this long.",
+      "default": 30
+    },
+    "limitWarnPercent": {
+      "type": "number",
+      "title": "Limit warning (%)",
+      "description": "Notify when the 5h or 7d window passes this.",
+      "default": 80
+    },
+    "limitCriticalPercent": {
+      "type": "number",
+      "title": "Limit critical (%)",
+      "description": "Second, urgent notification at this level.",
+      "default": 95
+    },
+    "contextNudgePercent": {
+      "type": "number",
+      "title": "Context nudge (%)",
+      "description": "Toast suggesting /compact when context passes this.",
+      "default": 70
+    }
+  }
+}

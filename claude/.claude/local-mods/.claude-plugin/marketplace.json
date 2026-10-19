@@ -1,0 +1,11 @@
+{
+  "name": "local-mods",
+  "owner": { "name": "pkoscik" },
+  "plugins": [
+    {
+      "name": "status-notify",
+      "source": "./mods/status-notify",
+      "description": "notify-send when a long turn finishes or a limit runs hot, with reset times; toast when context fills up."
+    }
+  ]
+}
