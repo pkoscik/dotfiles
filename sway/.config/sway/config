@@ -85,6 +85,8 @@ for_window [app_id="slack"] floating enable
 for_window [app_id="bluetui|wiremix|popup"] border pixel 1px
 for_window [app_id="bluetui|wiremix|popup"] floating enable
 
+for_window [all] inhibit_idle fullscreen
+
 # ... and some sane defaults
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="About"] floating enable
