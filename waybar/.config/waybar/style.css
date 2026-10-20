@@ -3,6 +3,11 @@
 @define-color separator  #44475A;
 @define-color urgent     #FF5555;
 @define-color inactive   #BFBFBF;
+@define-color comment    #6272A4;
+@define-color accent     #BD93F9;
+@define-color warning    #FFB86C;
+@define-color good       #50FA7B;
+@define-color highlight  #F1FA8C;
 
 * {
   border: none;
@@ -26,6 +31,7 @@ window#waybar {
 #workspaces button.focused {
   background: @separator;
   color: @statusline;
+  box-shadow: inset 0 -2px @accent;
 }
 
 #workspaces button.active {
@@ -62,10 +68,82 @@ window#waybar {
   background-size: 1px 60%;
 }
 
-/* Urgent indicators */
-#battery.warning {
+#mode {
+  background: @urgent;
+  padding: 0 8px;
+}
+
+/* Tooltips */
+tooltip {
+  background: @background;
+  border: 1px solid @separator;
+  border-radius: 8px;
+}
+tooltip label {
+  color: @statusline;
+  padding: 2px;
+}
+
+#custom-window.unfocused {
+  color: @comment;
+}
+
+/* Clickable modules */
+#network:hover,
+#custom-performance:hover,
+#pulseaudio:hover,
+#custom-brightness:hover,
+#idle_inhibitor:hover,
+#custom-notifications:hover,
+#bluetooth:hover,
+#custom-wireguard-manager:hover,
+#custom-arch-updates:hover,
+#custom-power:hover,
+#clock:hover {
+  background-color: @separator;
+}
+
+/* States */
+#pulseaudio.muted,
+#custom-notifications.paused,
+#bluetooth.disabled,
+#bluetooth.off,
+#idle_inhibitor.deactivated {
+  color: @comment;
+}
+#idle_inhibitor.activated {
+  color: @highlight;
+}
+#custom-brightness.unlinked {
+  color: @highlight;
+}
+#custom-arch-updates {
+  color: @accent;
+}
+#custom-wireguard-manager.connected,
+#battery.charging,
+#battery.plugged {
+  color: @good;
+}
+#network.disconnected {
   color: @urgent;
 }
-#battery.critical {
+
+#battery.warning:not(.charging) {
+  color: @warning;
+}
+
+#tray > .needs-attention {
+  background-color: @urgent;
+}
+
+@keyframes blink {
+  to {
+    background-color: @urgent;
+    color: @statusline;
+  }
+}
+#battery.critical:not(.charging) {
   color: @urgent;
+  animation: blink 0.5s steps(12) infinite alternate;
 }

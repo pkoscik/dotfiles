@@ -7,11 +7,11 @@ else
 fi
 
 # checkupdates (pacman-contrib) syncs a temp db; plain -Qu only sees the last -Sy
-count_updates() {
+list_updates() {
   {
     checkupdates
     [[ "$command" == "yay" ]] && yay -Qua
-  } 2>/dev/null | wc -l
+  } 2>/dev/null
 }
 
 run_update() {
@@ -20,15 +20,19 @@ run_update() {
   else
     alacritty --class 'popup' -e bash -c "yay -Syu; echo; read -p 'Press enter to close...'"
   fi
+  pkill -RTMIN+10 waybar
 }
 
 case "$1" in
   -s|--status)
-    updates=$(count_updates)
-    if [[ "$updates" -gt 0 ]]; then
-      echo "updates: $updates"
+    updates=$(list_updates)
+    if [[ -n "$updates" ]]; then
+      count=$(wc -l <<<"$updates")
+      # Tooltip: first 30 packages, "name old -> new"
+      jq -cn --arg count "$count" --arg list "$(head -30 <<<"$updates")" --arg more "$(( count > 30 ? count - 30 : 0 ))" \
+        '{text: "󰏗 \($count)", tooltip: ($list + (if $more != "0" then "\n… and \($more) more" else "" end))}'
     else
-      echo "$STATUS_HIDE_STR"
+      echo '{"text":""}'
     fi
     ;;
   -u)

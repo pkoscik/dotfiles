@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 STATUS_CONNECTED_STR='{"text":"Connected","class":"connected","alt":"connected"}'
 STATUS_DISCONNECTED_STR='{"text":"Disconnected","class":"disconnected","alt":"disconnected"}'
 STATUS_HIDE_STR='{"text":"","class":"","alt":""}'
