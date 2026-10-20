@@ -1,83 +1,135 @@
 configuration {
+    modes: "drun,Windows:~/.config/rofi/windows.sh,ssh";
+    display-drun: "Apps";
+    display-ssh: "SSH";
     terminal: "alacritty";
-    modes: "window,drun,ssh";
-    sidebar-mode: true;
     show-icons: true;
+    icon-theme: "Adwaita";
+    drun-display-format: "{name}";
+    sort: true;
+    sorting-method: "fzf";
     parse-known-hosts: false;
 }
 
+@theme "/dev/null"
+
 * {
-    font: "JetBrains Mono 12";
-    foreground: #cdd6f4;
-    background-color: #11111b;
-    active-background: #333366;
-    urgent-background: #0F0;
-    urgent-foreground: #00F;
-    selected-background: @active-background;
-    selected-urgent-background: @urgent-background;
-    selected-active-background: @active-background;
-    separatorcolor: @active-background;
-    bordercolor: @active-background;
+    /* Catppuccin Mocha */
+    bg: #1e1e2e;
+    surface: #313244;
+    overlay: #45475a;
+    fg: #cdd6f4;
+    fg-dim: #bac2de;
+    muted: #7f849c;
+    accent: #cba6f7;
+    on-accent: #1e1e2e;
+    red: #f38ba8;
+
+    font: "Adwaita Sans 12";
+    background-color: transparent;
+    text-color: @fg;
 }
 
-#window {
-    background-color: @background-color;
-    border-color: @bordercolor;
-    border: 1;
+window {
+    width: 620px;
+    padding: 14px;
+    border: 1px;
+    border-color: @overlay;
+    border-radius: 16px;
+    background-color: @bg;
+}
+
+mainbox {
+    spacing: 10px;
+    children: [ inputbar, message, listview, mode-switcher ];
+}
+
+inputbar {
+    padding: 10px 16px;
+    spacing: 10px;
+    border-radius: 12px;
+    background-color: @surface;
+    children: [ prompt, entry ];
+}
+
+prompt {
+    text-color: @accent;
+}
+
+entry {
+    placeholder: "Search";
+    placeholder-color: @muted;
+    cursor: text;
+}
+
+message {
+    padding: 8px 12px;
     border-radius: 10px;
-    padding: 5;
+    background-color: @surface;
 }
 
-#listview {
+textbox {
+    text-color: @fg-dim;
+}
+
+listview {
+    lines: 8;
+    fixed-height: true;
+    spacing: 4px;
     scrollbar: false;
+    cycle: true;
 }
 
-#element.normal.normal {
-    background-color: @background-color;
-    text-color: @foreground;
+element {
+    padding: 8px 12px;
+    spacing: 12px;
+    border-radius: 10px;
 }
 
-#element.normal.urgent {
-    background-color: @urgent-background;
-    text-color: @urgent-foreground;
+element normal.normal, element alternate.normal {
+    text-color: @fg;
 }
 
-#element.normal.active {
-    background-color: @active-background;
-    text-color: @foreground;
+element normal.active, element alternate.active {
+    text-color: @accent;
 }
 
-#element.selected.normal {
-    background-color: @selected-background;
-    text-color: @foreground;
+element normal.urgent, element alternate.urgent {
+    text-color: @red;
 }
 
-#element.selected.urgent {
-    background-color: @selected-urgent-background;
-    text-color: @foreground;
+element selected.normal, element selected.active {
+    background-color: @accent;
+    text-color: @on-accent;
 }
 
-#element.selected.active {
-    background-color: @selected-active-background;
-    text-color: @foreground;
+element selected.urgent {
+    background-color: @red;
+    text-color: @on-accent;
 }
 
-#element.alternate.normal {
-    background-color: @background-color;
-    text-color: @foreground;
+element-icon {
+    size: 28px;
 }
 
-#element.alternate.urgent {
-    background-color: @urgent-background;
-    text-color: @foreground;
+element-icon, element-text {
+    background-color: transparent;
+    text-color: inherit;
+    vertical-align: 0.5;
 }
 
-#element.alternate.active {
-    background-color: @active-background;
-    text-color: @foreground;
+mode-switcher {
+    spacing: 6px;
 }
 
-#button.selected {
-    background-color: @selected-background;
-    text-color: @foreground;
+button {
+    padding: 6px;
+    border-radius: 10px;
+    background-color: @surface;
+    text-color: @fg-dim;
+}
+
+button selected {
+    background-color: @accent;
+    text-color: @on-accent;
 }
