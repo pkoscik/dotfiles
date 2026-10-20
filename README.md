@@ -83,7 +83,6 @@ tesseract
 tesseract-data-eng
 tesseract-data-pol
 tig
-ttf-jetbrains-mono
 ttf-jetbrains-mono-nerd
 udiskie
 udisks2

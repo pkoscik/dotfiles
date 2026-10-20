@@ -2,7 +2,7 @@
 # pkoscik sway settings #
 #########################
 set $mod Mod4
-font pango:JetBrains Mono 8
+font pango:JetBrainsMono Nerd Font Propo 8
 
 # Titlebar with minimal borders
 default_border normal
@@ -53,6 +53,7 @@ exec_always {
     gsettings set org.gnome.desktop.interface cursor-theme 'Adwaita'
     gsettings set org.gnome.desktop.interface cursor-size 24
     gsettings set org.gnome.desktop.interface font-name 'Adwaita Sans 11'
+    gsettings set org.gnome.desktop.interface monospace-font-name 'JetBrainsMono Nerd Font 11'
 }
 
 seat * xcursor_theme Adwaita 24
