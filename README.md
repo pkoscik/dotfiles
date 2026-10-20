@@ -40,6 +40,7 @@ fish
 fzf
 git-delta
 gnome-disk-utility
+gnome-keyring
 gnome-text-editor
 gnome-themes-extra
 grim
@@ -65,6 +66,7 @@ polkit-gnome
 python-gobject
 ripgrep
 rofi-wayland
+seahorse
 slurp
 starship
 stow
