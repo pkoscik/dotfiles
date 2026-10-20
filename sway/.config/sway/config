@@ -106,7 +106,7 @@ bindsym $mod+Shift+s exec 'grim -g "$(slurp -d)" - | wl-copy'
 bindsym $mod+c exec '~/.config/sway/scripts/ocr.sh'
 
 # Swaylock
-bindsym $mod+o exec swaylock -c 000000
+bindsym $mod+o exec ~/.config/sway/scripts/lock.sh
 
 # Firefox
 bindsym $mod+w exec google-chrome-stable
@@ -183,12 +183,17 @@ bindsym $mod+backslash scratchpad show
 ##############
 # Media keys #
 ##############
-bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
-bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
-bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
-bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
-bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
-bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
+# osd.sh shows a progress bar via dunst; brightness covers backlights and DDC/CI monitors
+set $osd ~/.config/waybar/resources/osd.sh
+bindsym --locked XF86AudioMute exec $osd volume mute
+bindsym --locked XF86AudioLowerVolume exec $osd volume down
+bindsym --locked XF86AudioRaiseVolume exec $osd volume up
+bindsym --locked XF86AudioMicMute exec $osd mic mute
+bindsym --locked XF86MonBrightnessDown exec $osd brightness down
+bindsym --locked XF86MonBrightnessUp exec $osd brightness up
+# Desktop keyboards have no brightness keys
+bindsym $mod+F1 exec $osd brightness down
+bindsym $mod+F2 exec $osd brightness up
 bindsym --locked XF86AudioPlay exec playerctl play-pause
 bindsym --locked XF86AudioPause exec playerctl play-pause
 bindsym --locked XF86AudioNext exec playerctl next
