@@ -2,14 +2,17 @@ if test (uname) = "Linux"
     set -x CLUTTER_BACKEND wayland
     set -x ECORE_EVAS_ENGINE wayland_egl
     set -x ELM_ENGINE wayland_egl
-    set -x GDK_BACKEND wayland
+    set -x GDK_BACKEND "wayland,x11"
     set -x _JAVA_AWT_WM_NONREPARENTING 1
     set -x MOZ_ENABLE_WAYLAND 1
     set -x PASSWORD_STORE_ENABLE_EXTENSIONS true
     set -x QT_AUTO_SCREEN_SCALE_FACTOR 1
-    set -x QT_QPA_PLATFORM wayland
+    set -x QT_QPA_PLATFORM "wayland;xcb"
+    set -x QT_QPA_PLATFORMTHEME gtk3
     set -x QT_WAYLAND_DISABLE_WINDOWDECORATION 1
-    set -x SDL_VIDEODRIVER wayland
+    set -x SDL_VIDEODRIVER "wayland,x11"
+    set -x XCURSOR_THEME Adwaita
+    set -x XCURSOR_SIZE 24
     set -x XDG_CURRENT_DESKTOP sway
     set -x ELECTRON_OZONE_PLATFORM_HINT wayland
 end
