@@ -5,6 +5,7 @@ packages=$(awk '/## Arch packages/{flag=1; next} /## Firefox configuration/{flag
 echo "Installing $(echo $packages | wc -w) packages"
 if [ -n "$packages" ]; then
   sudo pacman -Syu $packages
+  xdg-user-dirs-update
 else
   echo "No packages found!"
   exit 1
