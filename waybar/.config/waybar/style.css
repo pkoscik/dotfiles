@@ -90,6 +90,7 @@ tooltip label {
 
 /* Clickable modules */
 #network:hover,
+#custom-devices:hover,
 #custom-performance:hover,
 #pulseaudio:hover,
 #custom-brightness:hover,
@@ -104,6 +105,7 @@ tooltip label {
 }
 
 /* States */
+#custom-devices.empty,
 #pulseaudio.muted,
 #custom-notifications.paused,
 #bluetooth.disabled,
@@ -117,8 +119,12 @@ tooltip label {
 #custom-brightness.unlinked {
   color: @highlight;
 }
-#custom-arch-updates {
+#custom-arch-updates,
+#custom-devices.mounted {
   color: @accent;
+}
+#custom-devices.unmounted {
+  color: @warning;
 }
 #custom-wireguard-manager.connected,
 #battery.charging,

@@ -27,7 +27,9 @@ gi.require_version("GdkPixbuf", "2.0")
 gi.require_version("Gtk", "3.0")
 gi.require_version("GtkLayerShell", "0.1")
 from gi.repository import Gdk, GdkPixbuf, Gio, GLib, Gtk, GtkLayerShell, Pango  # noqa: E402
-from sysinfo import cpu_times, cpu_usage, meminfo, temperature, temperature_sensor  # noqa: E402
+from sysinfo import (  # noqa: E402
+    cpu_times, cpu_usage, external_devices, meminfo, temperature, temperature_sensor,
+)
 
 RESOURCES = Path(__file__).resolve().parent
 BRIGHTNESS = str(RESOURCES / "brightness.sh")
@@ -150,6 +152,7 @@ switch image { color: transparent; }
 .list-row.active { background: #343746; }
 .row-icon { font-size: 16px; min-width: 22px; }
 .list-row.active .row-icon { color: #BD93F9; }
+.list-row.inactive label { color: #6272A4; }
 .row-title { font-weight: bold; }
 .row-subtitle { color: #6272A4; font-size: 10px; }
 button.accent { background: #343746; }
@@ -1839,6 +1842,156 @@ class PowerPopup(Popup):
         return False
 
 
+# Devices ----------------------------------------------------------------------
+
+
+def gvfs_mounts():
+    """Phones/cameras and other gvfs mounts: [{name, uri}].
+
+    Read in-process: spawning `gio mount -l` from this GTK process made the popup
+    window disappear (sysinfo.gvfs_mounts, used by the bar script, runs the CLI).
+    """
+    mounts = []
+    for mount in Gio.VolumeMonitor.get().get_mounts():
+        uri = mount.get_root().get_uri()
+        if not uri.startswith("file://"):
+            mounts.append({"name": mount.get_name(), "uri": uri})
+    return mounts
+
+
+class DevicesPopup(Popup):
+    """External drives (mount, open, eject) and phones/cameras mounted by gvfs."""
+
+    ICONS = {"usb": "\U000f0553", "mmc": "\U000f07ec", "phone": "\U000f03f2", "drive": "\U000f02ca"}
+    OPEN, EJECT = "\U000f0770", "\U000f01ea"
+
+    def __init__(self, output=None):
+        super().__init__(output)
+        self.state = None
+        self.busy = set()
+
+        self.card.pack_start(header("Devices"), False, False, 0)
+        self.rows = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=2)
+        self.card.pack_start(self.rows, False, False, 0)
+
+        self.status = icon_label("", "status")
+        self.status.set_xalign(0)
+        self.status.set_line_wrap(True)
+        self.status.set_no_show_all(True)
+        self.card.pack_start(self.status, False, False, 0)
+
+        self.card.pack_start(
+            footer(f"{GLYPHS['open']}  Open Files", lambda: self._launch(["nautilus", "--new-window"])),
+            False, False, 0,
+        )
+        self.volumes = Gio.VolumeMonitor.get()
+        for event in ("mount-added", "mount-removed", "mount-changed", "volume-added", "volume-removed",
+                      "drive-connected", "drive-disconnected", "drive-changed"):
+            self.volumes.connect(event, lambda *_: GLib.timeout_add(300, lambda: (self.refresh(), False)[-1]))
+        GLib.timeout_add(5000, lambda: (self.refresh(), True)[-1])
+
+    def _launch(self, argv):
+        spawn(*argv)
+        self.dismiss()
+
+    def _set_status(self, text):
+        self.status.set_text(text)
+        self.status.set_visible(bool(text))
+
+    def _run(self, key, steps, message, done_message=""):
+        """Run commands one after another in the background; stop at the first failure."""
+        self.busy.add(key)
+        self._set_status(message)
+        self.state = None
+        self.refresh()
+
+        def worker():
+            error = None
+            for argv in steps:
+                proc = subprocess.run(argv, capture_output=True, text=True)
+                if proc.returncode != 0:
+                    error = (proc.stderr or proc.stdout).strip().splitlines()[-1:] or ["Failed"]
+                    error = error[0]
+                    break
+            GLib.idle_add(finished, error)
+
+        def finished(error):
+            self.busy.discard(key)
+            self._set_status(error or done_message)
+            self.state = None
+            self.refresh()
+
+        threading.Thread(target=worker, daemon=True).start()
+
+    def refresh(self):
+        devices, phones = external_devices(), gvfs_mounts()
+        state = (devices, phones, set(self.busy))
+        if state == self.state:
+            return
+        self.state = state
+
+        for child in self.rows.get_children():
+            self.rows.remove(child)
+        if not devices and not phones:
+            empty = icon_label(f"{self.ICONS['usb']}  No external devices", "empty")
+            empty.set_xalign(0)
+            self.rows.pack_start(empty, False, False, 0)
+
+        for d in devices:
+            icon = self.ICONS["mmc"] if d["transport"] == "mmc" or "sd" in d["model"].lower() else self.ICONS["usb"]
+            if not d["fstype"]:
+                subtitle = f"No filesystem  ·  {human_bytes(d['size'])}" if d["size"] else "No media"
+                subtitle += f"  ·  {d['path']}"
+            elif d["mountpoint"]:
+                usage = f"{human_bytes(d['free'])} free of {human_bytes(d['total'])}" if d["total"] else ""
+                subtitle = "  ·  ".join(x for x in (d["mountpoint"], usage) if x)
+            else:
+                subtitle = f"Not mounted  ·  {human_bytes(d['size'])} {d['fstype']}"
+            if d["path"] in self.busy:
+                trailing = [icon_label("…", "dim")]
+            elif not d["fstype"]:
+                trailing = [flat_button("Disks", lambda p=d["drive"]: self._launch(
+                    ["gnome-disks", "--block-device", p]), "plain", tooltip="Format or inspect in GNOME Disks")
+                ] if d["size"] else []
+            elif d["fstype"] == "crypto_LUKS":
+                trailing = [icon_label("Encrypted", "dim")]
+            elif d["mountpoint"]:
+                trailing = [
+                    flat_button(self.OPEN, lambda m=d["mountpoint"]: self._launch(["xdg-open", m]), tooltip="Open"),
+                    flat_button(self.EJECT, lambda dev=d: self._eject(dev), tooltip="Unmount and eject"),
+                ]
+            else:
+                trailing = [flat_button("Mount", lambda dev=d: self._mount(dev), "accent")]
+            self.rows.pack_start(
+                ListRow(icon, d["label"], subtitle, *trailing,
+                        css_class="active" if d["mountpoint"] else "inactive" if not d["size"] else None),
+                False, False, 0,
+            )
+
+        for p in phones:
+            scheme = p["uri"].split(":", 1)[0]
+            kind = {"mtp": "Phone (MTP)", "gphoto2": "Camera", "afc": "iPhone"}.get(scheme, scheme)
+            trailing = [icon_label("…", "dim")] if p["uri"] in self.busy else [
+                flat_button(self.OPEN, lambda u=p["uri"]: self._launch(["gio", "open", u]), tooltip="Open"),
+                flat_button(self.EJECT, lambda u=p["uri"], n=p["name"]: self._run(
+                    u, [["gio", "mount", "-u", u]], f"Unmounting {n}…"), tooltip="Unmount"),
+            ]
+            self.rows.pack_start(ListRow(self.ICONS["phone"], p["name"], kind, *trailing, css_class="active"),
+                                 False, False, 0)
+        self.rows.show_all()
+
+    def _mount(self, device):
+        self._run(device["path"], [["udisksctl", "mount", "-b", device["path"]]],
+                  f"Mounting {device['label']}…")
+
+    def _eject(self, device):
+        same_drive = [d for d in external_devices() if d["drive"] == device["drive"] and d["mountpoint"]]
+        steps = [["udisksctl", "unmount", "-b", d["path"]] for d in same_drive]
+        steps.append(["udisksctl", "power-off", "-b", device["drive"]])
+        self._run(device["path"], steps, f"Ejecting {device['label']}…",
+                  f"{device['label']} can be unplugged now")
+
+
 POPUPS = {
     "audio": AudioPopup,
     "brightness": BrightnessPopup,
@@ -1847,6 +2000,7 @@ POPUPS = {
     "bluetooth": BluetoothPopup,
     "notifications": NotificationsPopup,
     "power": PowerPopup,
+    "devices": DevicesPopup,
 }
 
 

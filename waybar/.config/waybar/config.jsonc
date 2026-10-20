@@ -10,7 +10,6 @@
     "custom/window"
   ],
   "modules-right": [
-    "custom/arch-updates",
     "network",
     "custom/wireguard-manager",
     "bluetooth",
@@ -21,6 +20,8 @@
     "idle_inhibitor",
     "custom/notifications",
     "clock",
+    "custom/arch-updates",
+    "custom/devices",
     "tray",
     "custom/power"
   ],
@@ -73,6 +74,14 @@
     "return-type": "json",
     "restart-interval": 5,
     "on-click": "$HOME/.config/waybar/resources/control_center.py performance"
+  },
+  // External drives and phones; see resources/devices.py
+  "custom/devices": {
+    "exec": "$HOME/.config/waybar/resources/devices.py",
+    "return-type": "json",
+    "restart-interval": 5,
+    "on-click": "$HOME/.config/waybar/resources/control_center.py devices",
+    "on-click-right": "nautilus --new-window"
   },
   "tray": {
     "icon-size": 16,
