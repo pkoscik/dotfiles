@@ -1,3 +1,3 @@
 [screencast]
 chooser_type=dmenu
-chooser_cmd=rofi -dmenu -p "Share screen" -no-custom
+chooser_cmd=rofi -dmenu -p "Share screen" -no-custom -theme-str 'mode-switcher { enabled: false; }'
