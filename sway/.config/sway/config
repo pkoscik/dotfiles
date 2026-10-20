@@ -27,7 +27,7 @@ exec blueman-applet
 exec nm-applet
 exec dunst
 exec udiskie
-exec clipse -listen
+exec wl-paste --watch cliphist store
 exec swayidle -w \
          timeout 300 'swaylock -f -c 000000' \
          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
@@ -92,7 +92,6 @@ for_window [all] inhibit_idle fullscreen
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="About"] floating enable
 
-for_window [app_id="clipse"] floating enable, move position center, resize set 80ppt 80ppt, border pixel 1px
 
 ############
 # Bindings #
@@ -121,8 +120,8 @@ bindsym $mod+o exec ~/.config/sway/scripts/lock.sh
 # Firefox
 bindsym $mod+w exec google-chrome-stable
 
-# Clipse
-bindsym $mod+V exec alacritty --class clipse -e clipse
+# Clipboard history
+bindsym $mod+V exec ~/.config/sway/scripts/clipboard.sh
 
 # Focus
 bindsym $mod+h focus left
