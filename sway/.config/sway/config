@@ -68,6 +68,10 @@ for_window [app_id="slack"] border pixel 1px
 for_window [app_id="anytype"] border none
 # Spotify is xwayland: match on class, not app_id
 for_window [class="Spotify"] border none
+# GNOME apps and dialogs draw their own headerbars
+for_window [app_id="^org\.gnome\."] border none
+for_window [app_id="^xdg-desktop-portal-gtk$"] border none
+for_window [app_id="^polkit-gnome-authentication-agent-1$"] border none
 
 # Always float some windows
 # Bitwarden: chrome extension popout (any profile) + desktop app
