@@ -189,7 +189,7 @@
     "on-click-right": "alacritty --class 'bluetui' --command 'bluetui'"
   },
   "custom/power": {
-    "format": "⏻ ",
+    "format": "⏻",
     "tooltip": false,
     "on-click": "$HOME/.config/waybar/resources/control_center.py power"
   }

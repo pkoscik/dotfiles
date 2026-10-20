@@ -42,7 +42,7 @@ SETTLE_SECONDS = 0.4
 
 CSS = b"""
 * {
-  font-family: "JetBrainsMono Nerd Font", monospace;
+  font-family: "JetBrainsMono Nerd Font Propo", monospace;
   font-size: 12px;
   color: @fg;
 }
