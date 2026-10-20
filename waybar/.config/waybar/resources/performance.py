@@ -9,11 +9,12 @@ import json
 import os
 import time
 
-from sysinfo import cpu_times, cpu_usage, meminfo, temperature, temperature_sensor
+from sysinfo import cpu_times, cpu_usage, meminfo, temperature, temperature_sensor, theme_colors
 
 INTERVAL = 3
 DISK = "/"
-COLORS = {"warning": "#FFB86C", "critical": "#FF5555"}
+THEME = theme_colors()
+COLORS = {"warning": THEME.get("orange", "#fab387"), "critical": THEME.get("red", "#f38ba8")}
 ICONS = {"cpu": "", "temp": "", "memory": "\U000f035b", "disk": ""}
 
 

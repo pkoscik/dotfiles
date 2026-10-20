@@ -119,3 +119,12 @@ def gvfs_mounts():
         if match and not match.group(2).startswith("file://"):
             mounts.append({"name": match.group(1), "uri": match.group(2)})
     return mounts
+
+
+def theme_colors():
+    """Palette from waybar/colors.css: {name: "#rrggbb"}."""
+    try:
+        text = (Path(__file__).resolve().parent.parent / "colors.css").read_text()
+    except OSError:
+        return {}
+    return dict(re.findall(r"@define-color\s+(\w+)\s+(#[0-9a-fA-F]{6})\s*;", text))

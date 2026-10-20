@@ -28,12 +28,13 @@ gi.require_version("Gtk", "3.0")
 gi.require_version("GtkLayerShell", "0.1")
 from gi.repository import Gdk, GdkPixbuf, Gio, GLib, Gtk, GtkLayerShell, Pango  # noqa: E402
 from sysinfo import (  # noqa: E402
-    cpu_times, cpu_usage, external_devices, meminfo, temperature, temperature_sensor,
+    cpu_times, cpu_usage, external_devices, meminfo, temperature, temperature_sensor, theme_colors,
 )
 
 RESOURCES = Path(__file__).resolve().parent
 BRIGHTNESS = str(RESOURCES / "brightness.sh")
 PIDFILE = Path(os.environ.get("XDG_RUNTIME_DIR", "/tmp")) / "waybar-control-center.pid"
+THEME_COLORS = RESOURCES.parent / "colors.css"
 
 # Ignore external updates to a slider this long after the user touched it,
 # so in-flight pactl/ddcutil calls don't make the knob jump back.
@@ -43,14 +44,14 @@ CSS = b"""
 * {
   font-family: "JetBrainsMono Nerd Font", monospace;
   font-size: 12px;
-  color: #F8F8F2;
+  color: @fg;
 }
 window.catcher { background: transparent; }
 window.popup { background: transparent; }
 
 .card {
-  background: rgba(40, 42, 54, 0.97);
-  border: 1px solid #44475A;
+  background: alpha(@bg, 0.97);
+  border: 1px solid @overlay;
   border-radius: 14px;
   padding: 14px 14px 10px 14px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
@@ -68,17 +69,17 @@ window.popup { background: transparent; }
   to { opacity: 0; margin-top: 22px; margin-bottom: 0; }
 }
 .section-title {
-  color: #6272A4;
+  color: @muted;
   font-size: 10px;
   font-weight: bold;
   margin: 10px 2px 4px 2px;
 }
 .section-title.first { margin-top: 0; }
-.dim { color: #6272A4; }
+.dim { color: @muted; }
 .app-name { font-weight: bold; }
-.app-media { color: #6272A4; font-size: 10px; }
-.percent { min-width: 38px; color: #BFBFBF; }
-.empty { color: #6272A4; padding: 4px 2px; }
+.app-media { color: @muted; font-size: 10px; }
+.percent { min-width: 38px; color: @fg_dim; }
+.empty { color: @muted; padding: 4px 2px; }
 
 button {
   background: transparent;
@@ -89,56 +90,56 @@ button {
   min-height: 0;
   min-width: 0;
 }
-button:hover { background: #44475A; }
+button:hover { background: @overlay; }
 button.icon { font-size: 15px; min-width: 26px; }
-button.icon.muted label { color: #FF5555; }
-button.toggle.active label { color: #BD93F9; }
+button.icon.muted label { color: @red; }
+button.toggle.active label { color: @accent; }
 
-.device { padding: 6px 8px; background: #343746; border-radius: 9px; }
-.device:hover { background: #44475A; }
+.device { padding: 6px 8px; background: @surface; border-radius: 9px; }
+.device:hover { background: @overlay; }
 .device-row { padding: 6px 10px; border-radius: 8px; }
-.device-row.selected label { color: #BD93F9; }
+.device-row.selected label { color: @accent; }
 list, list row { background: transparent; }
 list row { border-radius: 8px; padding: 0; }
-list row:hover { background: #44475A; }
+list row:hover { background: @overlay; }
 
 scale { padding: 6px 4px; }
 scale trough {
   min-height: 6px;
   border-radius: 3px;
-  background: #44475A;
+  background: @overlay;
   border: none;
 }
 scale highlight {
   border-radius: 3px;
-  background: #BD93F9;
+  background: @accent;
   border: none;
 }
-scale.muted highlight { background: #6272A4; }
-scale.brightness highlight { background: #F1FA8C; }
+scale.muted highlight { background: @muted; }
+scale.brightness highlight { background: @yellow; }
 scale slider {
   min-width: 14px;
   min-height: 14px;
   margin: -5px;
   border-radius: 7px;
-  background: #F8F8F2;
+  background: @fg;
   border: none;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 }
-scale slider:hover { background: #FFFFFF; }
-separator { background: #44475A; min-height: 1px; margin: 8px 0 2px 0; }
+scale slider:hover { background: shade(@fg, 1.15); }
+separator { background: @overlay; min-height: 1px; margin: 8px 0 2px 0; }
 
 switch {
-  background: #44475A;
+  background: @overlay;
   border: none;
   border-radius: 11px;
   min-width: 38px;
   min-height: 20px;
   box-shadow: none;
 }
-switch:checked { background: #BD93F9; }
+switch:checked { background: @accent; }
 switch slider {
-  background: #F8F8F2;
+  background: @fg;
   border: none;
   border-radius: 9px;
   min-width: 18px;
@@ -149,76 +150,76 @@ switch slider {
 switch image { color: transparent; }
 
 .list-row { padding: 6px 8px; border-radius: 9px; }
-.list-row.active { background: #343746; }
+.list-row.active { background: @surface; }
 .row-icon { font-size: 16px; min-width: 22px; }
-.list-row.active .row-icon { color: #BD93F9; }
-.list-row.inactive label { color: #6272A4; }
+.list-row.active .row-icon { color: @accent; }
+.list-row.inactive label { color: @muted; }
 .row-title { font-weight: bold; }
-.row-subtitle { color: #6272A4; font-size: 10px; }
-button.accent { background: #343746; }
-button.accent:hover { background: #44475A; }
-button.accent label { color: #BD93F9; }
+.row-subtitle { color: @muted; font-size: 10px; }
+button.accent { background: @surface; }
+button.accent:hover { background: @overlay; }
+button.accent label { color: @accent; }
 button.footer { padding: 6px 8px; margin-top: 2px; }
-button.footer label { color: #BFBFBF; }
-.status { color: #FFB86C; padding: 2px; }
-.traffic-rx { color: #8BE9FD; }
-.traffic-tx { color: #FF79C6; }
+button.footer label { color: @fg_dim; }
+.status { color: @orange; padding: 2px; }
+.traffic-rx { color: @cyan; }
+.traffic-tx { color: @pink; }
 .big { font-size: 20px; font-weight: bold; }
-.big.warning { color: #FFB86C; }
-.big.critical { color: #FF5555; }
+.big.warning { color: @orange; }
+.big.critical { color: @red; }
 
 levelbar trough {
   min-height: 6px;
-  background: #44475A;
+  background: @overlay;
   border: none;
   border-radius: 3px;
   padding: 0;
 }
 levelbar block { border: none; border-radius: 3px; min-height: 6px; }
-levelbar block.filled { background: #BD93F9; }
+levelbar block.filled { background: @accent; }
 levelbar block.empty { background: transparent; }
-levelbar.warning block.filled { background: #FFB86C; }
-levelbar.critical block.filled { background: #FF5555; }
+levelbar.warning block.filled { background: @orange; }
+levelbar.critical block.filled { background: @red; }
 levelbar.vertical trough { min-width: 6px; min-height: 28px; }
 levelbar.vertical block { min-width: 6px; min-height: 0; }
-.usage-name { color: #BFBFBF; }
-.usage-value { color: #BFBFBF; font-size: 11px; }
-.proc-cpu, .proc-mem { color: #BFBFBF; }
+.usage-name { color: @fg_dim; }
+.usage-value { color: @fg_dim; font-size: 11px; }
+.proc-cpu, .proc-mem { color: @fg_dim; }
 
 entry {
-  background: #343746;
-  border: 1px solid #44475A;
+  background: @surface;
+  border: 1px solid @overlay;
   border-radius: 8px;
   padding: 4px 8px;
   box-shadow: none;
-  color: #F8F8F2;
+  color: @fg;
 }
-entry:focus { border-color: #BD93F9; }
+entry:focus { border-color: @accent; }
 
 .notification {
   padding: 8px 8px 8px 10px;
   border-radius: 10px;
-  background: #343746;
+  background: @surface;
   border-left: 3px solid transparent;
 }
-.notification.hover { background: #3C3F51; }
-.notification.critical { border-left-color: #FF5555; }
-.notification-app { color: #BD93F9; font-size: 10px; font-weight: bold; }
-.notification-time { color: #6272A4; font-size: 10px; }
-.notification-body { color: #BFBFBF; font-size: 11px; }
-button.plain label { color: #BFBFBF; }
+.notification.hover { background: mix(@surface, @overlay, 0.5); }
+.notification.critical { border-left-color: @red; }
+.notification-app { color: @accent; font-size: 10px; font-weight: bold; }
+.notification-time { color: @muted; font-size: 10px; }
+.notification-body { color: @fg_dim; font-size: 11px; }
+button.plain label { color: @fg_dim; }
 
 button.tile {
-  background: #343746;
+  background: @surface;
   border-radius: 12px;
   padding: 14px 6px 10px 6px;
 }
-button.tile:hover { background: #44475A; }
-button.tile.danger:hover .tile-icon { color: #FF5555; }
-button.tile.armed, button.tile.armed:hover { background: #FF5555; }
-button.tile.armed label { color: #282A36; }
-.tile-icon { font-size: 22px; color: #BD93F9; }
-.tile-label { font-size: 11px; color: #BFBFBF; }
+button.tile:hover { background: @overlay; }
+button.tile.danger:hover .tile-icon { color: @red; }
+button.tile.armed, button.tile.armed:hover { background: @red; }
+button.tile.armed label { color: @on_accent; }
+.tile-icon { font-size: 22px; color: @accent; }
+.tile-label { font-size: 11px; color: @fg_dim; }
 """
 
 
@@ -471,7 +472,11 @@ class Popup:
     def __init__(self, output=None):
         self.catchers = []
         provider = Gtk.CssProvider()
-        provider.load_from_data(CSS)
+        try:
+            colors = THEME_COLORS.read_bytes()
+        except OSError:
+            colors = b""
+        provider.load_from_data(colors + CSS)
         Gtk.StyleContext.add_provider_for_screen(
             Gdk.Screen.get_default(), provider, Gtk.STYLE_PROVIDER_PRIORITY_USER
         )
@@ -923,7 +928,8 @@ class Sparkline(Gtk.DrawingArea):
         cr.arc(radius, height - radius, radius, math.pi / 2, math.pi)
         cr.arc(radius, radius, radius, math.pi, 3 * math.pi / 2)
         cr.close_path()
-        cr.set_source_rgb(0x34 / 255, 0x37 / 255, 0x46 / 255)
+        surface = theme_colors().get("surface", "#313244")
+        cr.set_source_rgb(*(int(surface[i:i + 2], 16) / 255 for i in (1, 3, 5)))
         cr.fill_preserve()
         cr.clip()
 
@@ -988,7 +994,8 @@ class NetworkPopup(Popup):
         traffic.pack_start(self.rx_label, False, False, 2)
         traffic.pack_start(self.tx_label, False, False, 0)
         self.card.pack_start(traffic, False, False, 2)
-        self.graph = Sparkline(["#8BE9FD", "#FF79C6"], height=40)
+        colors = theme_colors()
+        self.graph = Sparkline([colors.get("cyan", "#94e2d5"), colors.get("pink", "#f5c2e7")], height=40)
         self.card.pack_start(self.graph, False, False, 2)
 
         self.vpn_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=2)
@@ -1252,7 +1259,7 @@ class PerformancePopup(Popup):
         self.cpu_details.set_ellipsize(Pango.EllipsizeMode.END)
         summary.pack_start(self.cpu_details, True, True, 0)
         self.card.pack_start(summary, False, False, 0)
-        self.graph = Sparkline(["#BD93F9"], height=48, maximum=100)
+        self.graph = Sparkline([theme_colors().get("accent", "#cba6f7")], height=48, maximum=100)
         self.card.pack_start(self.graph, False, False, 4)
         cores = Gtk.Box(spacing=3, homogeneous=True)
         self.core_bars = []

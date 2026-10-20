@@ -1,13 +1,4 @@
-@define-color background #282A36;
-@define-color statusline #F8F8F2;
-@define-color separator  #44475A;
-@define-color urgent     #FF5555;
-@define-color inactive   #BFBFBF;
-@define-color comment    #6272A4;
-@define-color accent     #BD93F9;
-@define-color warning    #FFB86C;
-@define-color good       #50FA7B;
-@define-color highlight  #F1FA8C;
+@import url("colors.css");
 
 * {
   border: none;
@@ -17,36 +8,36 @@
 }
 
 window#waybar {
-  background-color: @background;
-  color: @statusline;
+  background-color: @bg;
+  color: @fg;
 }
 
 /* Workspace buttons */
 #workspaces button {
   padding: 0 5px;
-  background: @background;
-  color: @inactive;
+  background: @bg;
+  color: @fg_dim;
 }
 
 #workspaces button.focused {
-  background: @separator;
-  color: @statusline;
+  background: @overlay;
+  color: @fg;
   box-shadow: inset 0 -2px @accent;
 }
 
 #workspaces button.active {
-  background: @separator;
-  color: @statusline;
+  background: @overlay;
+  color: @fg;
 }
 
 #workspaces button.urgent {
-  background: @urgent;
-  color: @statusline;
+  background: @red;
+  color: @fg;
 }
 
 #workspaces button:hover {
-  background: @separator;
-  color: @statusline;
+  background: @overlay;
+  color: @fg;
 }
 
 /* Module padding */
@@ -62,30 +53,30 @@ window#waybar {
 /* Module separators */
 .modules-right > *:not(:last-child) {
   /* 1px wide gradient border on right that fades at top and bottom */
-  background-image: linear-gradient(to bottom, transparent, @separator 20%, @separator 80%, transparent);
+  background-image: linear-gradient(to bottom, transparent, @overlay 20%, @overlay 80%, transparent);
   background-repeat: no-repeat;
   background-position: right center;
   background-size: 1px 60%;
 }
 
 #mode {
-  background: @urgent;
+  background: @red;
   padding: 0 8px;
 }
 
 /* Tooltips */
 tooltip {
-  background: @background;
-  border: 1px solid @separator;
+  background: @bg;
+  border: 1px solid @overlay;
   border-radius: 8px;
 }
 tooltip label {
-  color: @statusline;
+  color: @fg;
   padding: 2px;
 }
 
 #custom-window.unfocused {
-  color: @comment;
+  color: @muted;
 }
 
 /* Clickable modules */
@@ -101,7 +92,7 @@ tooltip label {
 #custom-arch-updates:hover,
 #custom-power:hover,
 #clock:hover {
-  background-color: @separator;
+  background-color: @overlay;
 }
 
 /* States */
@@ -111,45 +102,45 @@ tooltip label {
 #bluetooth.disabled,
 #bluetooth.off,
 #idle_inhibitor.deactivated {
-  color: @comment;
+  color: @muted;
 }
 #idle_inhibitor.activated {
-  color: @highlight;
+  color: @yellow;
 }
 #custom-brightness.unlinked {
-  color: @highlight;
+  color: @yellow;
 }
 #custom-arch-updates,
 #custom-devices.mounted {
   color: @accent;
 }
 #custom-devices.unmounted {
-  color: @warning;
+  color: @orange;
 }
 #custom-wireguard-manager.connected,
 #battery.charging,
 #battery.plugged {
-  color: @good;
+  color: @green;
 }
 #network.disconnected {
-  color: @urgent;
+  color: @red;
 }
 
 #battery.warning:not(.charging) {
-  color: @warning;
+  color: @orange;
 }
 
 #tray > .needs-attention {
-  background-color: @urgent;
+  background-color: @red;
 }
 
 @keyframes blink {
   to {
-    background-color: @urgent;
-    color: @statusline;
+    background-color: @red;
+    color: @fg;
   }
 }
 #battery.critical:not(.charging) {
-  color: @urgent;
+  color: @red;
   animation: blink 0.5s steps(12) infinite alternate;
 }
