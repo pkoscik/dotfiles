@@ -12,3 +12,18 @@ font = "JetBrains Mono 10"
 corner_radius = 7
 background = "#11111B"
 foreground = "#CDD6F4"
+
+progress_bar = true
+progress_bar_height = 8
+progress_bar_frame_width = 0
+progress_bar_min_width = 220
+progress_bar_max_width = 300
+progress_bar_corner_radius = 4
+highlight = "#b4befe"
+
+# Volume/brightness OSD from ~/.config/waybar/resources/osd.sh
+[osd]
+appname = osd
+format = "<b>%s</b>"
+alignment = center
+history_ignore = yes
