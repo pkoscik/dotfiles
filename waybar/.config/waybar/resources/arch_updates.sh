@@ -6,12 +6,23 @@ else
   command="pacman"
 fi
 
+cache="${XDG_RUNTIME_DIR:-/tmp}/waybar-arch-updates"
+
 # checkupdates (pacman-contrib) syncs a temp db; plain -Qu only sees the last -Sy
-list_updates() {
+fetch_updates() {
   {
     checkupdates
     [[ "$command" == "yay" ]] && yay -Qua
   } 2>/dev/null
+}
+
+# One waybar instance per output runs this concurrently; checkupdates shares
+# its temp db, so racing runs give different counts. Serialize and share a cache.
+list_updates() {
+  exec 9>"$cache.lock"
+  flock 9
+  [[ -n $(find "$cache" -mmin -1 2>/dev/null) ]] || fetch_updates >"$cache"
+  cat "$cache"
 }
 
 run_update() {
@@ -20,6 +31,7 @@ run_update() {
   else
     alacritty --class 'popup' -e bash -c "yay -Syu; echo; read -p 'Press enter to close...'"
   fi
+  rm -f "$cache"
   pkill -RTMIN+10 waybar
 }
 
