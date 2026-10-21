@@ -27,9 +27,11 @@ case "$1 $2" in
   "volume mute") wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle ;;
   "mic mute")    wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle 2>/dev/null ;;
   "brightness up"|"brightness down")
-    pct=$("$resources/brightness.sh" "$2" "$step")
+    # brightness.sh prints "<percent>\t<label>"
+    IFS=$'\t' read -r pct label < <("$resources/brightness.sh" "$2" "$step")
+    [[ -n "$pct" ]] || exit 1
     icons=(󰃞 󰃟 󰃝 󰃠)
-    osd "${icons[$(( pct * 3 / 100 ))]}" "Brightness  $pct%" "$pct"
+    osd "${icons[$(( pct * 3 / 100 ))]}" "Brightness  $pct%  ($label)" "$pct"
     exit 0
     ;;
   *) echo "usage: $0 volume up|down|mute | mic mute | brightness up|down" >&2; exit 1 ;;
