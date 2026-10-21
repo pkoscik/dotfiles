@@ -240,12 +240,9 @@ class Throttle:
         self.running = argv is not None
         if argv is None:
             return
-        flags = (
-            GLib.SpawnFlags.SEARCH_PATH
-            | GLib.SpawnFlags.DO_NOT_REAP_CHILD
-            | GLib.SpawnFlags.STDOUT_TO_DEV_NULL
-            | GLib.SpawnFlags.STDERR_TO_DEV_NULL
-        )
+        # No *_TO_DEV_NULL: PyGObject >= 3.58 always adds CHILD_INHERITS_STD{OUT,ERR},
+        # and GLib rejects the combination
+        flags = GLib.SpawnFlags.SEARCH_PATH | GLib.SpawnFlags.DO_NOT_REAP_CHILD
         pid, *_ = GLib.spawn_async(argv, flags=flags)
         GLib.child_watch_add(GLib.PRIORITY_DEFAULT, pid, self._next)
 
@@ -747,8 +744,7 @@ class BrightnessPopup(Popup):
     def _reload(self, *_):
         """DDC reads are slow: re-read in the background, then rebuild the sliders."""
         self.reload_button.set_sensitive(False)
-        flags = GLib.SpawnFlags.DO_NOT_REAP_CHILD | GLib.SpawnFlags.STDOUT_TO_DEV_NULL | GLib.SpawnFlags.STDERR_TO_DEV_NULL
-        pid, *_ = GLib.spawn_async([BRIGHTNESS, "refresh"], flags=flags)
+        pid, *_ = GLib.spawn_async([BRIGHTNESS, "refresh"], flags=GLib.SpawnFlags.DO_NOT_REAP_CHILD)
 
         def done(*_):
             self.refresh()
