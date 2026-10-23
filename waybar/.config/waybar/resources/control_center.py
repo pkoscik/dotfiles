@@ -1295,7 +1295,7 @@ class PerformancePopup(Popup):
 
         self.last_cpu = cpu_times()
         self.last_procs = (time.monotonic(), process_times())
-        GLib.timeout_add(400, lambda: (self.update(), False)[-1])
+        GLib.timeout_add(100, lambda: (self.update(), False)[-1])
         GLib.timeout_add(1000, lambda: (self.update(), True)[-1])
 
     def _launch(self, monitor):
