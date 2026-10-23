@@ -54,19 +54,19 @@ window.popup { background: transparent; }
   border: 1px solid @overlay;
   border-radius: 14px;
   padding: 14px 14px 10px 14px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
-  /* left/top leave room for the shadow; top+bottom stay constant while sliding */
-  margin: 12px 0 10px 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+  /* margins leave room for the shadow (window edges clip it); top+bottom stay constant while sliding */
+  margin: 28px 28px 10px 28px;
   animation: popup-in 160ms ease-out;
 }
 .card.closing { animation: popup-out 120ms ease-in forwards; }
 @keyframes popup-in {
-  from { opacity: 0; margin-top: 22px; margin-bottom: 0; }
-  to { opacity: 1; margin-top: 12px; margin-bottom: 10px; }
+  from { opacity: 0; margin-top: 38px; margin-bottom: 0; }
+  to { opacity: 1; margin-top: 28px; margin-bottom: 10px; }
 }
 @keyframes popup-out {
-  from { opacity: 1; margin-top: 12px; margin-bottom: 10px; }
-  to { opacity: 0; margin-top: 22px; margin-bottom: 0; }
+  from { opacity: 1; margin-top: 28px; margin-bottom: 10px; }
+  to { opacity: 0; margin-top: 38px; margin-bottom: 0; }
 }
 .section-title {
   color: @muted;
@@ -482,7 +482,7 @@ class Popup:
         self.window = self._make_window()
         self.card = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=4)
         self.card.get_style_context().add_class("card")
-        self.card.set_size_request(380, -1)
+        self.card.set_size_request(418, -1)  # includes the CSS margins
         self.window.add(self.card)
         self.closing = False
 
@@ -554,7 +554,8 @@ class Popup:
             GtkLayerShell.set_monitor(window, self.monitor)
         GtkLayerShell.set_anchor(window, GtkLayerShell.Edge.BOTTOM, True)
         GtkLayerShell.set_anchor(window, GtkLayerShell.Edge.RIGHT, True)
-        GtkLayerShell.set_margin(window, GtkLayerShell.Edge.RIGHT, 6)
+        # card sits 6px from the screen edge; the rest of its right margin is shadow room
+        GtkLayerShell.set_margin(window, GtkLayerShell.Edge.RIGHT, -22)
         GtkLayerShell.set_keyboard_mode(window, GtkLayerShell.KeyboardMode.EXCLUSIVE)
         window.connect("key-press-event", self._key)
         window.connect("destroy", Gtk.main_quit)
