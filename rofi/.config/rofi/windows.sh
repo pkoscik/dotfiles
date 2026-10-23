@@ -9,5 +9,5 @@ swaymsg -t get_tree -r | jq -j '
   .. | objects | select(.type? == "workspace") | (if .name == "__i3_scratch" then "scratchpad" else .name end) as $ws
   | .. | objects | select((.type? == "con" or .type? == "floating_con") and .pid?)
   | "<span alpha=\"55%\">\($ws | @html)</span>  \(.name // "" | @html)",
-    "\u0000icon\u001f\(.app_id // .window_properties.class // "" | ascii_downcase)",
+    "\u0000icon\u001f\(.app_id // .window_properties.class // "" | if . == "signal" then "signal-desktop" else ascii_downcase end)",
     "\u001finfo\u001f\(.id)\n"'
