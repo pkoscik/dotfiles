@@ -57,9 +57,9 @@ window.popup { background: transparent; }
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
   /* margins leave room for the shadow (window edges clip it); top+bottom stay constant while sliding */
   margin: 28px 28px 10px 28px;
-  animation: popup-in 160ms ease-out;
+  animation: popup-in 100ms ease-out;
 }
-.card.closing { animation: popup-out 120ms ease-in forwards; }
+.card.closing { animation: popup-out 80ms ease-in forwards; }
 @keyframes popup-in {
   from { opacity: 0; margin-top: 38px; margin-bottom: 0; }
   to { opacity: 1; margin-top: 28px; margin-bottom: 10px; }
@@ -500,7 +500,7 @@ class Popup:
             return
         self.closing = True
         self.card.get_style_context().add_class("closing")
-        GLib.timeout_add(130, Gtk.main_quit)
+        GLib.timeout_add(90, Gtk.main_quit)
 
     def close(self):
         pass
