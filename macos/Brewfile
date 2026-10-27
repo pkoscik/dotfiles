@@ -44,7 +44,7 @@ brew "rtl_433"
 brew "nmap"
 brew "telnet"
 brew "stress"
-brew "mole"
+brew "tlrc"
 
 cask "font-jetbrains-mono-nerd-font"
 cask "wezterm"
