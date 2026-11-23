@@ -11,7 +11,6 @@
   ],
   "modules-right": [
     "network",
-    "custom/wireguard-manager",
     "bluetooth",
     "custom/performance",
     "battery",
@@ -157,18 +156,6 @@
       "on-scroll-up": "shift_up",
       "on-scroll-down": "shift_down"
     }
-  },
-  "custom/wireguard-manager": {
-    "exec": "bash $HOME/.config/waybar/resources/wireguard-manager.sh -s",
-    "on-click": "bash $HOME/.config/waybar/resources/wireguard-manager.sh -t",
-    "format": "wg: {icon}",
-    "format-icons": {
-      "connected": "up",
-      "disconnected": "down"
-    },
-    "return-type": "json",
-    "interval": 5,
-    "hide-empty-text": true
   },
   "custom/arch-updates": {
     "exec": "bash $HOME/.config/waybar/resources/arch_updates.sh -s",

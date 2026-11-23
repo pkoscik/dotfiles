@@ -88,7 +88,6 @@ tooltip label {
 #idle_inhibitor:hover,
 #custom-notifications:hover,
 #bluetooth:hover,
-#custom-wireguard-manager:hover,
 #custom-arch-updates:hover,
 #custom-power:hover,
 #clock:hover {
@@ -117,7 +116,6 @@ tooltip label {
 #custom-devices.unmounted {
   color: @orange;
 }
-#custom-wireguard-manager.connected,
 #battery.charging,
 #battery.plugged {
   color: @green;
